@@ -1,35 +1,85 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+
+import React from "react";
+import "./IndexPage.css";
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <div className="page">
+      {/* Top bar */}
+      <header className="topbar">
+        <div className="topbar__inner">
+          <div className="brand" aria-label="Project name">
+            <span className="brand__mark" aria-hidden="true">
+              @
+            </span>
+            <span className="brand__text">Project Paramount</span>
+          </div>
+
+          {/* Tab bar items used for navigation */}
+          <nav className="tabs" aria-label="Primary navigation">
+            <a className="tab" href="#glossary">
+              Glossary
+            </a>
+            <a className="tab tab--active" href="#map" aria-current="page">
+              Cultural Map
+            </a>
+            <a className="tab" href="#story">
+              Story
+            </a>
+          </nav>
+        </div>
+      </header>
+
+      {/* Screen / Hero area */}
+      <main className="content">
+        <section className="hero" aria-label="Index hero">
+          {/* Background image area */}
+          <div className="hero__media" role="img" aria-label="Background image" />
+
+          {/* Overlay label box */}
+          <div className="hero__labelWrap">
+            <div className="hero__label">
+              <div className="hero__labelTitle">PROJECT PARAMOUNT</div>
+              <div className="hero__labelSubtitle">
+                Cultural map & stories of the fishing community
+              </div>
+            </div>
+          </div>
+
+          {/* Optional intro content under the hero image */}
+          <div className="hero__footer">
+            <p className="hero__blurb">
+              Explore places, practices, and oral histories—then dive deeper through glossary entries and
+              curated story chapters.
+            </p>
+
+            <div className="hero__ctaRow">
+              <a className="cta cta--primary" href="#map">
+                Open Cultural Map
+              </a>
+              <a className="cta cta--ghost" href="#story">
+                Start Story Mode
+              </a>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      {/* Footer (lightweight) */}
+      <footer className="footer">
+        <div className="footer__inner">
+          <span>© {new Date().getFullYear()} Project Paramount</span>
+          <span className="footer__dot" aria-hidden="true">
+            •
+          </span>
+          <a className="footer__link" href="#about">
+            About
+          </a>
+        </div>
+      </footer>
+    </div>
+  );
 }
+
 
 export default App

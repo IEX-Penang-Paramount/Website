@@ -1,7 +1,8 @@
 import React from 'react'
 
-export default function main() {
+function StoriesMain() {
   return (
     <div>StoriesMain</div>
   )
 }
+export default StoriesMain

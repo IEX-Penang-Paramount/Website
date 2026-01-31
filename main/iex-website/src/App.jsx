@@ -1,6 +1,7 @@
 
 import React from "react";
 import "./IndexPage.css";
+import { Link } from "react-router-dom";
 
 function App() {
   return (
@@ -10,22 +11,22 @@ function App() {
         <div className="topbar__inner">
           <div className="brand" aria-label="Project name">
             <span className="brand__mark" aria-hidden="true">
-              @
+              P
             </span>
             <span className="brand__text">Project Paramount</span>
           </div>
 
           {/* Tab bar items used for navigation */}
           <nav className="tabs" aria-label="Primary navigation">
-            <a className="tab" href="#glossary">
+            <Link className="tab" to="/glossary">
               Glossary
-            </a>
-            <a className="tab tab--active" href="#map" aria-current="page">
+            </Link>
+            <Link className="tab" to="/cultural-map">
               Cultural Map
-            </a>
-            <a className="tab" href="#story">
+            </Link>
+            <Link className="tab" to="/story">
               Story
-            </a>
+            </Link>
           </nav>
         </div>
       </header>

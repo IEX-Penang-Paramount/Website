@@ -1,7 +1,8 @@
 import React from 'react'
 
-export default function main() {
+function GlossaryMain() {
   return (
     <div>GlossaryMain</div>
   )
 }
+export default GlossaryMain

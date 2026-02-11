@@ -16,18 +16,21 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./main/iex-website
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
           node-version: "20"
           cache: "npm"
-      - run: cd main/iex-website
+          cache-dependency-path: ./main/iex-website/package-lock.json
       - run: npm ci
       - run: npm run build
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: dist
+          path: ./main/iex-website/dist
 
   deploy:
     environment:

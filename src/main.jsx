@@ -12,7 +12,7 @@ createRoot(document.getElementById('root')).render(
   <StrictMode>
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<App />} />
+        <Route path="/Website" element={<App />} />
         <Route path="/glossary" element={<GlossaryMain />} />
         <Route path="/cultural-map" element={<CulturalMapMain />} />
         <Route path="/story" element={<StoriesMain />} />

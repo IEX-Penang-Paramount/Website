@@ -10,7 +10,7 @@
     rgba(58, 42, 32, 0.85),
     rgba(30, 21, 16, 0.55)
   );
-
+  display: flex;
   border-bottom: 1px solid var(--border);
 }
 

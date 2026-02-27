@@ -1,0 +1,224 @@
+:root {
+  --warm-bg: #2a1f18;
+  --warm-panel: rgba(255, 230, 200, 0.08);
+  --warm-panel-2: rgba(255, 230, 200, 0.12);
+  --warm-border: rgba(255, 200, 160, 0.22);
+  --warm-text: rgba(255, 245, 235, 0.95);
+  --warm-muted: rgba(255, 220, 190, 0.75);
+  --warm-accent: #d48b5c;
+  --warm-accent-soft: rgba(212, 139, 92, 0.22);
+  --shadow: 0 18px 50px rgba(0, 0, 0, 0.55);
+  --radius-lg: 18px;
+  --radius-md: 14px;
+  --radius-sm: 12px;
+}
+
+/* Page wrapper */
+.glossaryPage {
+  min-height: 100vh;
+  background:
+    radial-gradient(900px 500px at 12% 0%, rgba(212, 139, 92, 0.22), transparent 60%),
+    radial-gradient(700px 400px at 92% 18%, rgba(180, 110, 70, 0.22), transparent 65%),
+    linear-gradient(180deg, #3a2a20 0%, #1e1510 100%);
+  color: var(--warm-text);
+  display: flex;
+  flex-direction: column;
+  padding: 1px;
+}
+
+/* Main content area */
+.glossaryMain {
+  max-width: min(1100px, 92vw);
+  margin: 20 auto;
+  padding: 22px 16px 30px;
+  display: flex;
+
+}
+
+.glossaryHeader {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+
+  padding: 16px;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--warm-border);
+  background: rgba(255, 230, 200, 0.04);
+  box-shadow: var(--shadow);
+  scroll-margin-top: 90px;
+}
+
+.glossaryTitleBlock {
+  min-width: 240px;
+}
+
+.glossaryTitle {
+  margin: 0;
+  font-size: clamp(22px, 2.2vw, 30px);
+  letter-spacing: 0.6px;
+}
+
+.glossarySubtitle {
+  margin: 6px 0 0;
+  color: var(--warm-muted);
+  line-height: 1.5;
+  max-width: 60ch;
+}
+
+.glossaryControls {
+  display: flex;
+  gap: 12px;
+  align-items: flex-end;
+  flex-wrap: wrap;
+}
+
+.controlLabel {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.controlText {
+  font-size: 12px;
+  letter-spacing: 0.4px;
+  color: var(--warm-muted);
+  text-transform: uppercase;
+}
+
+.searchInput,
+.typeSelect {
+  height: 40px;
+  border-radius: 999px;
+  border: 1px solid var(--warm-border);
+  background: var(--warm-panel);
+  color: var(--warm-text);
+  padding: 0 14px;
+  outline: none;
+}
+
+.searchInput {
+  width: min(360px, 72vw);
+}
+
+.searchInput::placeholder {
+  color: rgba(255, 220, 190, 0.55);
+}
+
+.searchInput:focus,
+.typeSelect:focus {
+  border-color: rgba(212, 139, 92, 0.6);
+  box-shadow: 0 0 0 3px rgba(212, 139, 92, 0.18);
+}
+
+/* Grid area */
+.gridWrap {
+   scroll-margin-top: 90px;
+}
+
+.previewGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 14px;
+}
+
+/* Square preview cards (clickable) */
+.previewCard {
+  cursor: pointer;
+  text-align: left;
+
+  border: 1px solid var(--warm-border);
+  border-radius: var(--radius-md);
+  background: rgba(255, 230, 200, 0.05);
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.35);
+
+  padding: 14px;
+  transition: transform 140ms ease, background 140ms ease, border-color 140ms ease;
+
+  /* square-ish, but still responsive */
+  aspect-ratio: 1 / 1;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  color: inherit;
+}
+
+.previewCard:hover {
+  transform: translateY(-2px);
+  background: rgba(255, 230, 200, 0.07);
+}
+
+.previewCard--active {
+  border-color: rgba(212, 139, 92, 0.75);
+  background: var(--warm-accent-soft);
+}
+
+/* Meta row */
+.cardMeta {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 10px;
+}
+
+.typePill {
+  font-size: 12px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 200, 160, 0.28);
+  background: rgba(255, 230, 200, 0.08);
+  color: rgba(255, 245, 235, 0.9);
+}
+
+/* Empty state */
+.emptyState {
+  padding: 22px 16px;
+  border-radius: var(--radius-lg);
+  border: 1px dashed rgba(255, 200, 160, 0.28);
+  background: rgba(255, 230, 200, 0.04);
+  text-align: center;
+}
+
+.emptyTitle {
+  font-weight: 900;
+  letter-spacing: 0.6px;
+}
+
+.emptyHint {
+  margin-top: 6px;
+  color: var(--warm-muted);
+}
+
+/* ---- Styling YOUR GlossaryPreview structure (no changes to GlossaryPreview.jsx) ---- */
+.despPrevFrame {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.wordFrame {
+  font-weight: 900;
+  letter-spacing: 0.6px;
+  font-size: 16px;
+  color: rgba(255, 245, 235, 0.98);
+}
+
+.namePrevFrame .pDescription {
+  color: var(--warm-muted);
+  line-height: 1.5;
+
+  /* keep the preview tidy in a square */
+  display: -webkit-box;
+  -webkit-line-clamp: 5;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Mobile tweaks */
+@media (max-width: 520px) {
+  .previewCard {
+    aspect-ratio: auto; /* allow taller cards on small screens */
+  }
+}

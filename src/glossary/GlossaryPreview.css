@@ -1,0 +1,42 @@
+/* Container inside the clickable square card */
+.despPrevFrame {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-height: 0;
+}
+
+/* Word title */
+.wordFrame {
+  font-weight: 900;
+  letter-spacing: 0.5px;
+  font-size: 16px;
+  line-height: 1.15;
+  color: rgba(255, 245, 235, 0.98);
+
+  /* keep long words neat */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Description area */
+.namePrevFrame {
+  flex: 1;
+  min-height: 0;
+}
+
+.pDescription {
+  margin: 0;
+  color: rgba(255, 220, 190, 0.78);
+  line-height: 1.55;
+
+  /* tidy clamp for square cards */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 5;
+  overflow: hidden;
+
+  /* fallback for non-webkit: still avoid spill */
+  max-height: calc(1.55em * 5);
+}

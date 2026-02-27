@@ -1,15 +1,21 @@
 import { Link } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
+
+function NavigationItem({addr, label}){
+  const location = useLocation();
+    return location.pathname == addr 
+         ? <div/> 
+         : (<Link className="tab" to={addr} >
+              {label}
+            </Link>)
+  }
   export function NavigationBar() {
     return (<nav className="tabs" aria-label="Primary navigation">
-            <Link className="tab" to="/glossary">
-              Glossary
-            </Link>
-            <Link className="tab" to="/cultural-map">
-              Cultural Map
-            </Link>
-            <Link className="tab" to="/story">
-              Story
-            </Link>
+            <NavigationItem addr="/glossary" label="Glossary"/>
+            <NavigationItem addr="/cultural-map" label = "Cultural Map"/>
+            <NavigationItem addr = "/story" label = "Story"/>
+            <NavigationItem addr = "/Website" label = "Main"/>
           </nav>);
   }
+

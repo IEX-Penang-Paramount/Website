@@ -1,8 +1,12 @@
 import React from 'react'
+import { TopBar } from '../Reusables/TopComponents/TopBar'
 
 function GlossaryMain() {
   return (
-    <div>GlossaryMain</div>
+    <div>
+      <TopBar/>
+      GlossaryMain
+      </div>
   )
 }
 export default GlossaryMain

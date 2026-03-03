@@ -2,51 +2,36 @@ import React, { useMemo, useState } from "react";
 import { TopBar } from "../Reusables/TopComponents/TopBar";
 import { GlossaryPreview } from "./GlossaryPreview";
 import "./Glossary.css";
-
+import { glossaryData } from "./glossaryData";
 function GlossaryMain() {
   // Mock data (replace with your real data source later)
-  const glossaryData = useMemo(
-    () => [
-      {
-        id: "w1",
-        name: "顺其自然",
-        pDescription: "Let nature take its course; accept uncertainty in fishing.",
-        type: "a",
-      },
-      {
-        id: "w2",
-        name: "涨潮",
-        pDescription: "High tide; water level rises and currents may change.",
-        type: "b",
-      },
-      {
-        id: "w3",
-        name: "退潮",
-        pDescription: "Low tide; water level falls, affecting fishing timing.",
-        type: "b",
-      },
-      {
-        id: "w4",
-        name: "海风",
-        pDescription: "Sea breeze; often linked to comfort and fishing rhythm.",
-        type: "c",
-      },
-      {
-        id: "w5",
-        name: "运气",
-        pDescription: "Luck; fishermen sometimes describe catch as dependent on luck.",
-        type: "a",
-      },
-    ],
+  
+  const glossaryDataMem = useMemo(
+    () => glossaryData,
     []
   );
-
   const [search, setSearch] = useState("");
   const [typeFilter, setTypeFilter] = useState("all"); // all | a | b | c
   const [currentWord, setCurrentWord] = useState(null);
+  
+  const SelectionMenu = () => (
+                  <label className="controlLabel">
+                    <span className="controlText">Type</span>
+                    <select
+                      className="typeSelect"
+                      value={typeFilter}
+                      onChange={(e) => setTypeFilter(e.target.value)}
+                      aria-label="Filter glossary by type"
+                    >
+                      <option value="all">All</option>
+                      <option value="a">a</option>
+                      <option value="b">b</option>
+                      <option value="c">c</option>
+                    </select>
+                  </label>);
 
-  function GlossaryHeader() {
-       return  (<header className="glossaryHeader">
+  const GlossaryHeader = () => (
+              <header className="glossaryHeader">
                 <div className="glossaryTitleBlock">
                   <h1 className="glossaryTitle">Glossary</h1>
                   <p className="glossarySubtitle">
@@ -66,28 +51,15 @@ function GlossaryMain() {
                     />
                   </label>
 
-                  <label className="controlLabel">
-                    <span className="controlText">Type</span>
-                    <select
-                      className="typeSelect"
-                      value={typeFilter}
-                      onChange={(e) => setTypeFilter(e.target.value)}
-                      aria-label="Filter glossary by type"
-                    >
-                      <option value="all">All</option>
-                      <option value="a">a</option>
-                      <option value="b">b</option>
-                      <option value="c">c</option>
-                    </select>
-                  </label>
+
                 </div>
               </header>);
-}
 
+  //AI wrote this but Memoised design to reduce repetition, passable
   const filtered = useMemo(() => {
     const q = search.trim().toLowerCase();
 
-    return glossaryData.filter((w) => {
+    return glossaryDataMem.filter((w) => {
       const matchesType = typeFilter === "all" ? true : w.type === typeFilter;
       const matchesQuery =
         q.length === 0
@@ -96,7 +68,7 @@ function GlossaryMain() {
 
       return matchesType && matchesQuery;
     });
-  }, [glossaryData, search, typeFilter]);
+  }, [glossaryDataMem, search, typeFilter]);
 
   return (
     <div className="glossaryPage">
@@ -105,6 +77,7 @@ function GlossaryMain() {
         <section className="gridWrap" aria-label="Glossary preview list">
         
         <GlossaryHeader />
+        <SelectionMenu/>
           {filtered.length === 0 ? (
             <div className="emptyState">
               <div className="emptyTitle">No results</div>
@@ -128,6 +101,7 @@ function GlossaryMain() {
             </div>
           )}
         </section>
+        
       </main>
     </div>
   );

@@ -2,34 +2,15 @@
 import React from "react";
 import "./IndexPage.css";
 import { Link } from "react-router-dom";
+import { NavigationBar } from "./Reusables/TopComponents/NavigationBar";
+import { TopBar } from "./Reusables/TopComponents/TopBar";
 
 function App() {
   return (
     <div className="page">
       {/* Top bar */}
-      <header className="topbar">
-        <div className="topbar__inner">
-          <div className="brand" aria-label="Project name">
-            <span className="brand__mark" aria-hidden="true">
-              P
-            </span>
-            <span className="brand__text">Project Paramount</span>
-          </div>
+      <TopBar/>
 
-          {/* Tab bar items used for navigation */}
-          <nav className="tabs" aria-label="Primary navigation">
-            <Link className="tab" to="/glossary">
-              Glossary
-            </Link>
-            <Link className="tab" to="/cultural-map">
-              Cultural Map
-            </Link>
-            <Link className="tab" to="/story">
-              Story
-            </Link>
-          </nav>
-        </div>
-      </header>
 
       {/* Screen / Hero area */}
       <main className="content">

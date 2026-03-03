@@ -1,5 +1,6 @@
 import "./GlossaryItem.css"
 
+
 function NamePanel({name}){
     return (<div className="nameFrame">
      {name}
@@ -32,13 +33,13 @@ function ExamplePanel({example}) {
  * @param example Any example sentences
  *  
  */
-
-export function GlossaryItem({name,imagePath = "",pDescription,sDescription,example}) {
-    return (<div className="wordFrame">
-        <NamePanel name = {name}  />
-        {imagePath == "" ? <div/> : <ImagePanel/>}
-        <DescriptionPanel pDescription={pDescription} sDescription={sDescription}/>
-        <ExamplePanel example={example}/>
+export function GlossaryItem({word}) {
+    return (<div className="innerWordFrame">
+        <NamePanel name = {word.name}  />
+        {word.imagePath == "" ? <div/> : <ImagePanel imagePath={word.imagePath}/>}
+        <DescriptionPanel pDescription={word.pDescription} sDescription={word.sDescription}/>
+        <ExamplePanel example={word.example}/>
      </div>);
 
 }
+

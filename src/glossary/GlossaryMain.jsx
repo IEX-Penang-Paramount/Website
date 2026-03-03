@@ -3,6 +3,9 @@ import { TopBar } from "../Reusables/TopComponents/TopBar";
 import { GlossaryPreview } from "./GlossaryPreview";
 import "./Glossary.css";
 import { glossaryData } from "./glossaryData";
+import { useNavigate } from "react-router-dom";
+
+
 function GlossaryMain() {
   // Mock data (replace with your real data source later)
   
@@ -13,6 +16,7 @@ function GlossaryMain() {
   const [search, setSearch] = useState("");
   const [typeFilter, setTypeFilter] = useState("all"); // all | a | b | c
   const [currentWord, setCurrentWord] = useState(null);
+  const navigate = useNavigate();
   
   const SelectionMenu = () => (
                   <label className="controlLabel">
@@ -30,30 +34,6 @@ function GlossaryMain() {
                     </select>
                   </label>);
 
-  const GlossaryHeader = () => (
-              <header className="glossaryHeader">
-                <div className="glossaryTitleBlock">
-                  <h1 className="glossaryTitle">Glossary</h1>
-                  <p className="glossarySubtitle">
-                    Browse terms like a dictionary. Search and filter by type.
-                  </p>
-                </div>
-
-                <div className="glossaryControls" role="search">
-                  <label className="controlLabel">
-                    <span className="controlText">Search</span>
-                    <input
-                      className="searchInput"
-                      value={search}
-                      onChange={(e) => setSearch(e.target.value)}
-                      placeholder="Search by word or description…"
-                      aria-label="Search glossary"
-                    />
-                  </label>
-
-
-                </div>
-              </header>);
 
   //AI wrote this but Memoised design to reduce repetition, passable
   const filtered = useMemo(() => {
@@ -76,7 +56,29 @@ function GlossaryMain() {
       <main className="glossaryMain">
         <section className="gridWrap" aria-label="Glossary preview list">
         
-        <GlossaryHeader />
+        <header className="glossaryHeader">
+                <div className="glossaryTitleBlock">
+                  <h1 className="glossaryTitle">Glossary</h1>
+                  <p className="glossarySubtitle">
+                    Browse terms like a dictionary. Search and filter by type.
+                  </p>
+                </div>
+
+                <div className="glossaryControls" role="search">
+                  <label className="controlLabel">
+                    <span className="controlText">Search</span>
+                    <input
+                      className="searchInput"
+                      value={search}
+                      onChange={(e) => setSearch(e.target.value)}
+                      placeholder="Search by word or description…"
+                      aria-label="Search glossary"
+                    />
+                  </label>
+
+
+                </div>
+              </header>
         <SelectionMenu/>
           {filtered.length === 0 ? (
             <div className="emptyState">
@@ -90,7 +92,11 @@ function GlossaryMain() {
                   key={w.id}
                   type="button"
                   className={`previewCard ${currentWord?.id === w.id ? "previewCard--active" : ""}`}
-                  onClick={() => setCurrentWord(w)}
+                  onClick={() => {
+                    // route to the description page of the word, pass the word data to the description page
+                    setCurrentWord(w);
+                    navigate(`/glossary-detail/${w.id}`);
+                  }}
                 >
                   <GlossaryPreview name={w.name} pDescription={w.pDescription} />
                   <div className="cardMeta">

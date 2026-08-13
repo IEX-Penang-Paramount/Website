@@ -8,12 +8,6 @@ const NAV = getNavItem("/cultural-map");
 
 function CulturalMapMain() {
   return (
-
-    <div>
-      <TopBar/>
-      CulturalMapMain
-      </div>
-  )
     <>
       <PageHeader title={NAV.label} subtitle={NAV.description} />
 

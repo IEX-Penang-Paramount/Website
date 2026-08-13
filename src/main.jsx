@@ -15,7 +15,7 @@ import StoriesMain from "./stories/StoriesMain.jsx";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <BrowserRouter>
+    <BrowserRouter basename="/Website">
       <Routes>
         <Route element={<Layout />}>
           <Route path="/" element={<App />} />

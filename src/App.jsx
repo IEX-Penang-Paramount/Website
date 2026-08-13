@@ -1,86 +1,61 @@
+import Button from "./components/ui/Button.jsx";
+import Card from "./components/ui/Card.jsx";
+import { SECTION_ITEMS } from "./config/navigation.js";
+import { SITE } from "./config/site.js";
+import "./App.css";
 
-import React from "react";
-import "./IndexPage.css";
-import { Link } from "react-router-dom";
-
+/** Home page. Chrome (top bar, footer) comes from Layout. */
 function App() {
   return (
-    <div className="page">
-      {/* Top bar */}
-      <header className="topbar">
-        <div className="topbar__inner">
-          <div className="brand" aria-label="Project name">
-            <span className="brand__mark" aria-hidden="true">
-              P
-            </span>
-            <span className="brand__text">Project Paramount</span>
-          </div>
+    <>
+      <section className="home-hero">
+        <div className="container">
+          <h1 className="home-hero__title">{SITE.name}</h1>
+          <p className="home-hero__subtitle">{SITE.tagline}</p>
 
-          {/* Tab bar items used for navigation */}
-          <nav className="tabs" aria-label="Primary navigation">
-            <Link className="tab" to="/glossary">
-              Glossary
-            </Link>
-            <Link className="tab" to="/cultural-map">
-              Cultural Map
-            </Link>
-            <Link className="tab" to="/story">
-              Story
-            </Link>
-          </nav>
+          <div className="home-hero__actions">
+            <Button to="/cultural-map">Open Cultural Map</Button>
+            <Button to="/story" variant="secondary">
+              Read the Stories
+            </Button>
+          </div>
         </div>
-      </header>
+      </section>
 
-      {/* Screen / Hero area */}
-      <main className="content">
-        <section className="hero" aria-label="Index hero">
-          {/* Background image area */}
-          <div className="hero__media" role="img" aria-label="Background image" />
-
-          {/* Overlay label box */}
-          <div className="hero__labelWrap">
-            <div className="hero__label">
-              <div className="hero__labelTitle">PROJECT PARAMOUNT</div>
-              <div className="hero__labelSubtitle">
-                Cultural map & stories of the fishing community
-              </div>
-            </div>
-          </div>
-
-          {/* Optional intro content under the hero image */}
-          <div className="hero__footer">
-            <p className="hero__blurb">
-              Explore places, practices, and oral histories—then dive deeper through glossary entries and
-              curated story chapters.
-            </p>
-
-            <div className="hero__ctaRow">
-              <a className="cta cta--primary" href="#map">
-                Open Cultural Map
-              </a>
-              <a className="cta cta--ghost" href="#story">
-                Start Story Mode
-              </a>
-            </div>
-          </div>
-        </section>
-      </main>
-
-      {/* Footer (lightweight) */}
-      <footer className="footer">
-        <div className="footer__inner">
-          <span>© {new Date().getFullYear()} Project Paramount</span>
-          <span className="footer__dot" aria-hidden="true">
-            •
-          </span>
-          <a className="footer__link" href="#about">
-            About
-          </a>
+      <section className="section">
+        <div className="container">
+          <h2 className="section__title">About the project</h2>
+          <p className="prose">{SITE.intro}</p>
         </div>
-      </footer>
-    </div>
+      </section>
+
+      <section className="section section--alt">
+        <div className="container">
+          <h2 className="section__title">Explore</h2>
+          <div className="home-cards">
+            {SECTION_ITEMS.map((item) => (
+              <Card
+                key={item.path}
+                title={item.label}
+                description={item.description}
+                to={item.path}
+                linkLabel={`View ${item.label.toLowerCase()}`}
+              />
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="section" id="about">
+        <div className="container">
+          <div className="home-about">
+            <h2 className="section__title">How it was made</h2>
+            <p className="prose">{SITE.about}</p>
+          </div>
+        </div>
+      </section>
+    </>
   );
 }
 
-
-export default App
+export default App;

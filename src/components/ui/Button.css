@@ -1,0 +1,40 @@
+/* Flat action links — solid fills, no gradients, no icons. */
+
+.btn {
+  display: inline-block;
+  padding: var(--space-3) var(--space-5);
+
+  font-size: var(--text-sm);
+  font-weight: 600;
+  text-align: center;
+
+  border: 1px solid transparent;
+  border-radius: var(--radius);
+  transition: background-color var(--transition), border-color var(--transition),
+    color var(--transition);
+}
+
+.btn:focus-visible {
+  outline: 2px solid var(--color-terracotta);
+  outline-offset: 3px;
+}
+
+.btn--primary {
+  background: var(--color-terracotta);
+  color: var(--color-on-accent);
+}
+
+.btn--primary:hover {
+  background: var(--color-terracotta-dk);
+}
+
+/* Sits on the navy hero, so it borrows the surrounding text colour. */
+.btn--secondary {
+  background: transparent;
+  border-color: currentColor;
+  color: inherit;
+}
+
+.btn--secondary:hover {
+  background: var(--color-navy-deep);
+}

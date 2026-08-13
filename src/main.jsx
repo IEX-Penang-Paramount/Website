@@ -16,7 +16,7 @@ import GlossaryDisplayPage from './glossary/GlossaryDisplayPage.jsx';
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <BrowserRouter>
+    <BrowserRouter basename="/Website">
       <Routes>
         <Route element={<Layout />}>
           <Route path="/" element={<App />} />

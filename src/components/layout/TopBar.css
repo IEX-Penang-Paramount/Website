@@ -1,0 +1,92 @@
+/* Fixed top bar — flat navy, unaffected by page scroll. */
+
+.topbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+
+  height: var(--topbar-h);
+  background: var(--color-navy);
+  border-bottom: 1px solid var(--color-navy-deep);
+}
+
+.topbar__inner {
+  height: 100%;
+  width: 100%;
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding: 0 var(--space-5);
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-5);
+}
+
+/* ---------- Brand (text only — no logo mark) ---------- */
+
+.topbar__brand {
+  font-size: var(--text-base);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--color-on-dark);
+  white-space: nowrap;
+}
+
+/* ---------- Tabs ---------- */
+
+.topbar__nav {
+  display: flex;
+  align-items: center;
+  gap: var(--space-5);
+}
+
+.topbar__tab {
+  padding: var(--space-1) 0;
+
+  font-size: var(--text-sm);
+  font-weight: 500;
+  white-space: nowrap;
+  color: var(--color-on-dark-muted);
+
+  border-bottom: 2px solid transparent;
+  transition: color var(--transition), border-color var(--transition);
+}
+
+.topbar__tab:hover {
+  color: var(--color-on-dark);
+  border-bottom-color: var(--color-teal);
+}
+
+.topbar__tab--active {
+  font-weight: 600;
+  color: var(--color-on-dark);
+  border-bottom-color: var(--color-terracotta);
+}
+
+.topbar__brand:focus-visible,
+.topbar__tab:focus-visible {
+  outline: 2px solid var(--color-terracotta);
+  outline-offset: 4px;
+}
+
+/* ---------- Narrow screens: brand above a scrollable tab row ---------- */
+
+@media (max-width: 720px) {
+  .topbar__inner {
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: center;
+    gap: var(--space-3);
+    padding: var(--space-3) var(--space-4);
+  }
+
+  .topbar__nav {
+    gap: var(--space-4);
+    overflow-x: auto;
+    /* Room for the underline and focus ring inside the scroll area. */
+    padding-bottom: var(--space-1);
+  }
+}

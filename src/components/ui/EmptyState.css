@@ -1,0 +1,15 @@
+/* Placeholder panel — dashed hairline reads as "nothing here yet". */
+
+.empty-state {
+  /* Always follows introductory copy, so it carries its own leading gap. */
+  margin: var(--space-5) 0 0;
+  padding: var(--space-7) var(--space-5);
+
+  font-size: var(--text-base);
+  text-align: center;
+  color: var(--color-ink-muted);
+
+  background: var(--color-surface);
+  border: 1px dashed var(--color-rule);
+  border-radius: var(--radius);
+}

@@ -1,0 +1,49 @@
+/* ==========================================================================
+   Layout primitives — shared structural classes used across every page.
+   Components style their own internals; these handle page rhythm and width.
+   ========================================================================== */
+
+/* Horizontal gutter + max width. Sections stay full-bleed so their background
+   colour spans the viewport; only the inner container is constrained. */
+.container {
+  width: 100%;
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding: 0 var(--space-5);
+}
+
+/* Vertical rhythm for a band of content. */
+.section {
+  padding: var(--space-8) 0;
+}
+
+/* Alternating band — a flat fill, not a gradient. */
+.section--alt {
+  background: var(--color-sand-alt);
+}
+
+/* Pushes page content clear of the fixed top bar. */
+.site-main {
+  padding-top: var(--topbar-h);
+}
+
+/* ---------- Shared text helpers ---------- */
+
+.section__title {
+  margin: 0 0 var(--space-4);
+  font-size: var(--text-xl);
+  line-height: var(--leading-tight);
+  color: var(--color-navy);
+}
+
+.prose {
+  max-width: var(--measure);
+  margin: 0;
+  font-size: var(--text-lg);
+  line-height: var(--leading-normal);
+  color: var(--color-ink-muted);
+}
+
+.prose + .prose {
+  margin-top: var(--space-4);
+}

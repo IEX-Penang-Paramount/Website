@@ -5,6 +5,11 @@ import "./Glossary.css";
 import { glossaryData } from "./glossaryData";
 import { useNavigate } from "react-router-dom";
 
+import PageHeader from "../components/ui/PageHeader.jsx";
+import EmptyState from "../components/ui/EmptyState.jsx";
+import { getNavItem } from "../config/navigation.js";
+
+const NAV = getNavItem("/glossary");
 
 function GlossaryMain() {
   // Mock data (replace with your real data source later)

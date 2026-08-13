@@ -1,0 +1,22 @@
+/* Subpage title band — flat sand fill, separated by a hairline rule. */
+
+.page-header {
+  padding: var(--space-7) 0;
+  background: var(--color-sand-alt);
+  border-bottom: 1px solid var(--color-rule);
+}
+
+.page-header__title {
+  margin: 0;
+  font-size: var(--text-2xl);
+  line-height: var(--leading-tight);
+  color: var(--color-navy);
+}
+
+.page-header__subtitle {
+  max-width: var(--measure);
+  margin: var(--space-3) 0 0;
+  font-size: var(--text-lg);
+  line-height: var(--leading-normal);
+  color: var(--color-ink-muted);
+}

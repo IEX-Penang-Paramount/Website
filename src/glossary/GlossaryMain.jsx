@@ -57,7 +57,6 @@ function GlossaryMain() {
 
   return (
     <div className="glossaryPage">
-      <TopBar />
       <main className="glossaryMain">
         <section className="gridWrap" aria-label="Glossary preview list">
         

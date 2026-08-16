@@ -1,12 +1,12 @@
+// Template for adding new articles.
+// Content lives in Assets/Content/{articleID}.jsx as a React component.
 const Template = {
     articleID: "(MUST BE UNIQUE)",
-    title: "template Aritcle",
+    title: "template Article",
     abstract: "(Optional so far)",
     abstractQuote: "(Optional so far)",
     author: "",
     time: "",
-    content: "",
-
 }
 
 export const stories = [
@@ -17,7 +17,6 @@ export const stories = [
     abstractQuote: "This is a test quote",
     author: "Anxinal",
     time: "2026-08-15",
-    content: "",
 },
     {
     articleID: "A2",
@@ -26,7 +25,6 @@ export const stories = [
     abstractQuote: "This is a test quote 2",
     author: "Anxinal",
     time: "2026-08-16",
-    content: "",
 },
     {
     articleID: "A3",
@@ -35,6 +33,5 @@ export const stories = [
     abstractQuote: "This is a test quote 3",
     author: "Anxinal",
     time: "2026-08-17",
-    content: "",
 },
 ]

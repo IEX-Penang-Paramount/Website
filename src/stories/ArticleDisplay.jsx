@@ -1,8 +1,10 @@
+import { lazy, Suspense } from "react";
 import { useParams, Link } from "react-router-dom";
 import { stories } from "./Assets/StoryData.js";
 import "./ArticleDisplay.css";
 
 const images = import.meta.glob("./Assets/Images/*", { eager: true });
+const contentModules = import.meta.glob("./Assets/Content/*.jsx");
 
 function getArticleImage(articleID) {
   for (const [path, mod] of Object.entries(images)) {
@@ -12,6 +14,12 @@ function getArticleImage(articleID) {
     }
   }
   return null;
+}
+
+function getContentComponent(articleID) {
+  const key = `./Assets/Content/${articleID}.jsx`;
+  if (!contentModules[key]) return null;
+  return lazy(contentModules[key]);
 }
 
 function ArticleDisplay() {
@@ -30,6 +38,7 @@ function ArticleDisplay() {
   }
 
   const heroImage = getArticleImage(articleID);
+  const Content = getContentComponent(articleID);
 
   return (
     <div className="article-page">
@@ -54,7 +63,13 @@ function ArticleDisplay() {
       </header>
 
       <div className="article-body">
-        {article.content || <p>No content available yet.</p>}
+        {Content ? (
+          <Suspense fallback={<p>Loading...</p>}>
+            <Content />
+          </Suspense>
+        ) : (
+          <p>No content available yet.</p>
+        )}
       </div>
     </div>
   );

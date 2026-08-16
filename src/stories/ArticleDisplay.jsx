@@ -9,7 +9,8 @@ const contentModules = import.meta.glob("./Assets/Content/*.jsx");
 function getArticleImage(articleID) {
   for (const [path, mod] of Object.entries(images)) {
     const filename = path.split("/").pop();
-    if (filename.startsWith(articleID)) {
+    const name = filename.substring(0, filename.lastIndexOf("."));
+    if (name === articleID) {
       return mod.default;
     }
   }

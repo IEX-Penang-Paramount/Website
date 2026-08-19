@@ -1,5 +1,6 @@
 const armenianStreet = {
   id: "armenian-street",
+  type: "pin",
   name: "Armenian Street",
   nameZh: "打铜仔街",
   lat: 5.416,

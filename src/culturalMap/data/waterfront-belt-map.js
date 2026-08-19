@@ -1,5 +1,6 @@
 const waterfrontBelt = {
   id: "waterfront-belt",
+  type: "pin",
   name: "Waterfront Belt",
   nameZh: "海滨地带",
   lat: 5.412,

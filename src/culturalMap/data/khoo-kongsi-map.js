@@ -1,5 +1,6 @@
 const khooKongsi = {
   id: "khoo-kongsi",
+  type: "pin",
   name: "Khoo Kongsi",
   nameZh: "邱公司",
   lat: 5.4142,

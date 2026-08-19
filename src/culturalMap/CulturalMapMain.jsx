@@ -11,9 +11,9 @@ const NAV = getNavItem("/cultural-map");
 
 function CulturalMapMain() {
   const [navStack, setNavStack] = useState([]);
-  const [selectedPin, setSelectedPin] = useState(null);
+  const [selectedItem, setSelectedItem] = useState(null);
 
-  const currentPins = useMemo(
+  const currentItems = useMemo(
     () =>
       navStack.length === 0
         ? getRootPins()
@@ -21,19 +21,19 @@ function CulturalMapMain() {
     [navStack]
   );
 
-  const handleSelectPin = (pin) => setSelectedPin(pin);
+  const handleSelectItem = (item) => setSelectedItem(item);
 
-  const handleDrillDown = (superPin) => {
-    setNavStack((prev) => [...prev, superPin]);
-    setSelectedPin(null);
+  const handleDrillDown = (item) => {
+    setNavStack((prev) => [...prev, item]);
+    setSelectedItem(null);
   };
 
   const handleGoBack = () => {
     setNavStack((prev) => prev.slice(0, -1));
-    setSelectedPin(null);
+    setSelectedItem(null);
   };
 
-  const handleClosePanel = () => setSelectedPin(null);
+  const handleClosePanel = () => setSelectedItem(null);
 
   return (
     <>
@@ -52,15 +52,15 @@ function CulturalMapMain() {
 
       <section className="cultural-map-section">
         <MapView
-          pins={currentPins}
-          selectedPin={selectedPin}
-          onSelectPin={handleSelectPin}
+          items={currentItems}
+          selectedItem={selectedItem}
+          onSelectItem={handleSelectItem}
           navStack={navStack}
         />
         {navStack.length > 0 && <BackButton onClick={handleGoBack} />}
-        {selectedPin && (
+        {selectedItem && (
           <LocationPanel
-            pin={selectedPin}
+            item={selectedItem}
             onClose={handleClosePanel}
             onNavigate={handleDrillDown}
           />

@@ -1,11 +1,11 @@
 import { CATEGORIES, isSuperPin, getPinColor } from "./data/index.js";
 import "./LocationPanel.css";
 
-function LocationPanel({ pin, onClose, onNavigate }) {
-  const isSuper = isSuperPin(pin);
-  const cat = isSuper ? null : CATEGORIES[pin.category];
-  const color = getPinColor(pin);
-  const badgeLabel = isSuper ? pin.name : cat?.label;
+function LocationPanel({ item, onClose, onNavigate }) {
+  const isSuper = isSuperPin(item);
+  const cat = isSuper ? null : CATEGORIES[item.category];
+  const color = getPinColor(item);
+  const badgeLabel = isSuper ? item.name : cat?.label;
 
   return (
     <aside className="loc-panel">
@@ -20,24 +20,24 @@ function LocationPanel({ pin, onClose, onNavigate }) {
         {badgeLabel}
       </span>
 
-      <h2 className="loc-panel__title">{pin.name}</h2>
-      {pin.nameZh && (
-        <p className="loc-panel__title-zh">{pin.nameZh}</p>
+      <h2 className="loc-panel__title">{item.name}</h2>
+      {item.nameZh && (
+        <p className="loc-panel__title-zh">{item.nameZh}</p>
       )}
 
-      <p className="loc-panel__desc">{pin.shortDescription}</p>
+      <p className="loc-panel__desc">{item.shortDescription}</p>
 
-      {!isSuper && pin.address && (
+      {!isSuper && item.address && (
         <dl className="loc-panel__meta">
           <dt>Address</dt>
-          <dd>{pin.address}</dd>
+          <dd>{item.address}</dd>
         </dl>
       )}
 
       {isSuper && (
         <button
           className="loc-panel__navigate"
-          onClick={() => onNavigate(pin)}
+          onClick={() => onNavigate(item)}
         >
           Explore locations &rarr;
         </button>

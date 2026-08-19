@@ -1,34 +1,32 @@
 import { useEffect } from "react";
 import { MapContainer, TileLayer, useMap } from "react-leaflet";
-import { isSuperPin, isArea } from "./data/index.js";
-import MapPin from "./MapPin.jsx";
-import MapArea from "./MapArea.jsx";
+import MapObject from "./MapObject.jsx";
 import "leaflet/dist/leaflet.css";
 import "./MapView.css";
 
 const CENTER = [5.414, 100.339];
 const DEFAULT_ZOOM = 15;
 
-function FlyToHandler({ selectedPin, navStack }) {
+function FlyToHandler({ selectedItem, navStack }) {
   const map = useMap();
-  const currentSuperPin = navStack[navStack.length - 1] || null;
+  const currentParent = navStack[navStack.length - 1] || null;
 
   useEffect(() => {
-    if (selectedPin) {
-      map.flyTo([selectedPin.lat, selectedPin.lng], 17, { duration: 1.2 });
-    } else if (currentSuperPin) {
-      map.flyTo([currentSuperPin.lat, currentSuperPin.lng], 16, {
+    if (selectedItem) {
+      map.flyTo([selectedItem.lat, selectedItem.lng], 17, { duration: 1.2 });
+    } else if (currentParent) {
+      map.flyTo([currentParent.lat, currentParent.lng], 16, {
         duration: 1.0,
       });
     } else {
       map.flyTo(CENTER, DEFAULT_ZOOM, { duration: 1.0 });
     }
-  }, [selectedPin, currentSuperPin, map]);
+  }, [selectedItem, currentParent, map]);
 
   return null;
 }
 
-function MapView({ pins, selectedPin, onSelectPin, navStack }) {
+function MapView({ items, selectedItem, onSelectItem, navStack }) {
   return (
     <MapContainer
       center={CENTER}
@@ -41,27 +39,17 @@ function MapView({ pins, selectedPin, onSelectPin, navStack }) {
         url="https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png"
       />
 
-      {pins.map((pin, i) =>
-        isArea(pin) ? (
-          <MapArea
-            key={pin.id}
-            location={pin}
-            isSelected={selectedPin?.id === pin.id}
-            onSelect={onSelectPin}
-          />
-        ) : (
-          <MapPin
-            key={pin.id}
-            location={pin}
-            index={i}
-            isLeaf={!isSuperPin(pin)}
-            isSelected={selectedPin?.id === pin.id}
-            onSelect={onSelectPin}
-          />
-        )
-      )}
+      {items.map((item, i) => (
+        <MapObject
+          key={item.id}
+          location={item}
+          index={i}
+          isSelected={selectedItem?.id === item.id}
+          onSelect={onSelectItem}
+        />
+      ))}
 
-      <FlyToHandler selectedPin={selectedPin} navStack={navStack} />
+      <FlyToHandler selectedItem={selectedItem} navStack={navStack} />
     </MapContainer>
   );
 }

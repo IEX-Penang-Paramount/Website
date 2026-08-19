@@ -1,5 +1,6 @@
 const cheongFattTze = {
   id: "cheong-fatt-tze",
+  type: "pin",
   name: "Cheong Fatt Tze Mansion",
   nameZh: "张弼士故居",
   lat: 5.4211,

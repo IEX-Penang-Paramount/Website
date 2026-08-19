@@ -1,5 +1,6 @@
 const kapitanKeling = {
   id: "kapitan-keling",
+  type: "pin",
   name: "Kapitan Keling Mosque",
   nameZh: "甲必丹吉宁回教堂",
   lat: 5.4145,

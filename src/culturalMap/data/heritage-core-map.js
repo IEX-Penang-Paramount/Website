@@ -1,5 +1,6 @@
 const heritageCore = {
   id: "heritage-core",
+  type: "pin",
   name: "Heritage Core",
   nameZh: "文化核心区",
   lat: 5.4155,

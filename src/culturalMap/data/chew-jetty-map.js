@@ -1,5 +1,6 @@
 const chewJetty = {
   id: "chew-jetty",
+  type: "pin",
   name: "Chew Jetty",
   nameZh: "周姓桥",
   lat: 5.404,

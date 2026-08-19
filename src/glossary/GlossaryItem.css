@@ -1,20 +1,6 @@
-/* Warm palette (inherits well with your existing theme) */
-:root {
-  --warm-text: rgba(255, 245, 235, 0.95);
-  --warm-muted: rgba(255, 220, 190, 0.78);
-  --warm-muted-2: rgba(255, 220, 190, 0.62);
-
-  --warm-panel: rgba(255, 230, 200, 0.06);
-  --warm-panel-2: rgba(255, 230, 200, 0.10);
-  --warm-border: rgba(255, 200, 160, 0.22);
-
-  --warm-accent: #d48b5c;
-  --warm-accent-soft: rgba(212, 139, 92, 0.20);
-
-  --radius-lg: 18px;
-  --radius-md: 14px;
-  --shadow: 0 18px 50px rgba(0, 0, 0, 0.45);
-}
+/* ==========================================================================
+   Glossary detail card — uses site design tokens from styles/tokens.css.
+   ========================================================================== */
 
 /* Container for one word entry */
 .innerWordFrame {
@@ -22,72 +8,71 @@
   max-width: 900px;
   margin: 0 auto;
 
-  border: 1px solid var(--warm-border);
-  border-radius: var(--radius-lg);
-  background: var(--warm-panel);
-  box-shadow: var(--shadow);
+  border: 1px solid var(--color-rule);
+  border-radius: var(--radius);
+  background: var(--color-surface);
+  box-shadow: var(--shadow-sm);
 
-  padding: 18px 18px;
+  padding: var(--space-6);
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  gap: var(--space-4);
 }
 
 /* Word name/title */
 .nameFrame {
-  font-size: clamp(22px, 2.6vw, 34px);
-  font-weight: 900;
-  letter-spacing: 0.6px;
-  color: var(--warm-text);
-  line-height: 1.15;
+  font-size: var(--text-2xl);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--color-navy);
+  line-height: var(--leading-tight);
 }
 
 /* Description block */
 .despFrame {
-  border: 1px solid rgba(255, 200, 160, 0.18);
-  border-radius: var(--radius-md);
-  background: rgba(255, 230, 200, 0.04);
-  padding: 14px 14px;
+  border: 1px solid var(--color-rule);
+  border-radius: var(--radius);
+  background: var(--color-sand-alt);
+  padding: var(--space-4) var(--space-5);
 
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: var(--space-3);
 }
 
 .pDescription {
-  font-size: 15px;
-  line-height: 1.65;
-  color: var(--warm-text);
+  font-size: var(--text-base);
+  line-height: var(--leading-normal);
+  color: var(--color-ink);
 }
 
 .sDescription {
-  font-size: 14px;
-  line-height: 1.6;
-  color: var(--warm-muted);
-  border-top: 1px dashed rgba(255, 200, 160, 0.22);
-  padding-top: 10px;
+  font-size: var(--text-sm);
+  line-height: var(--leading-normal);
+  color: var(--color-ink-muted);
+  border-top: 1px solid var(--color-rule);
+  padding-top: var(--space-3);
 }
 
 /* Example block */
 .exampleFrame {
-  border-left: 4px solid var(--warm-accent);
-  border-radius: 10px;
+  border-left: 4px solid var(--color-terracotta);
+  border-radius: var(--radius);
+  background: var(--color-sand-alt);
+  padding: var(--space-3) var(--space-4);
 
-  background: rgba(212, 139, 92, 0.10);
-  padding: 12px 14px;
-
-  color: var(--warm-muted-2);
-  line-height: 1.6;
-  font-size: 14px;
+  color: var(--color-ink-muted);
+  line-height: var(--leading-normal);
+  font-size: var(--text-sm);
 }
 
 /* Small screens */
 @media (max-width: 520px) {
-  .wordFrame {
-    padding: 14px 14px;
+  .innerWordFrame {
+    padding: var(--space-4);
   }
 
   .despFrame {
-    padding: 12px 12px;
+    padding: var(--space-3) var(--space-4);
   }
 }

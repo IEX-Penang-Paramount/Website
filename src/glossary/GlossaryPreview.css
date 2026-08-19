@@ -1,22 +1,23 @@
+/* ==========================================================================
+   Glossary preview card content — uses site design tokens from styles/tokens.css.
+   ========================================================================== */
+
 /* Container inside the clickable square card */
 .despPrevFrame {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: var(--space-3);
   min-height: 0;
-  max-width: 100;
-  max-height: 100;
 }
 
 /* Word title */
 .wordFrame {
-  font-weight: 900;
-  letter-spacing: 0.5px;
-  font-size: 16px;
-  line-height: 1.15;
-  color: rgba(255, 245, 235, 0.98);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  font-size: var(--text-base);
+  line-height: var(--leading-tight);
+  color: var(--color-navy);
 
-  /* keep long words neat */
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -30,15 +31,13 @@
 
 .pDescription {
   margin: 0;
-  color: rgba(255, 220, 190, 0.78);
-  line-height: 1.55;
+  color: var(--color-ink-muted);
+  font-size: var(--text-sm);
+  line-height: var(--leading-normal);
 
-  /* tidy clamp for square cards */
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 5;
+  line-clamp: 5;
   overflow: hidden;
-
-  /* fallback for non-webkit: still avoid spill */
-  max-height: calc(1.55em * 5);
 }

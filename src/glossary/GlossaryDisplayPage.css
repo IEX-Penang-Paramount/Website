@@ -1,28 +1,19 @@
-:root {
-  --warm-text: rgba(255, 245, 235, 0.95);
-  --warm-muted: rgba(255, 220, 190, 0.78);
-  --warm-border: rgba(255, 200, 160, 0.22);
-  --warm-accent: #d48b5c;
+/* ==========================================================================
+   Glossary detail page — uses site design tokens from styles/tokens.css.
+   ========================================================================== */
 
-  --topbar-h: 72px; /* keep consistent with your sticky topbar */
-}
-
-/* Page wrapper (so TopBar doesn't cover the header content) */
+/* Page wrapper — offset clears the fixed top bar */
 .outerWordFrame {
-  /* IMPORTANT:
-     GlossaryDisplayPage also uses "wordFrame".
-     This adds page-level padding without breaking GlossaryItem,
-     since GlossaryItem is inside and has its own card styling too.
-  */
   min-height: 100vh;
-  padding: calc(var(--topbar-h) + 18px) 16px 28px;
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding: var(--space-5) var(--space-5) var(--space-8);
 }
 
 /* Back link row */
 .returnLink {
   max-width: 900px;
-  margin: 0 auto 12px;
-
+  margin: 0 auto var(--space-4);
   display: flex;
   align-items: center;
 }
@@ -30,38 +21,30 @@
 /* Link style */
 .returnLink a {
   display: inline-flex;
-  gap: 8px;
+  gap: var(--space-2);
   align-items: center;
 
-  color: var(--warm-muted);
-  font-weight: 750;
-  font-size: 13px;
+  color: var(--color-ink-muted);
+  font-weight: 600;
+  font-size: var(--text-sm);
   letter-spacing: 0.3px;
   text-transform: uppercase;
 
-  padding: 10px 12px;
-  border-radius: 999px;
-  border: 1px solid rgba(255, 200, 160, 0.18);
-  background: rgba(255, 230, 200, 0.05);
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius);
+  border: 1px solid var(--color-rule);
+  background: var(--color-surface);
 
-  transition: transform 140ms ease, background 140ms ease, border-color 140ms ease,
-    color 140ms ease;
+  transition: color var(--transition), border-color var(--transition), background var(--transition);
 }
 
 .returnLink a:hover {
-  transform: translateY(-1px);
-  background: rgba(255, 230, 200, 0.08);
-  border-color: rgba(212, 139, 92, 0.35);
-  color: var(--warm-text);
+  color: var(--color-terracotta);
+  border-color: var(--color-terracotta);
+  background: var(--color-sand-alt);
 }
 
 .returnLink a:focus-visible {
-  outline: 3px solid rgba(212, 139, 92, 0.35);
+  outline: 3px solid rgba(196, 112, 63, 0.3);
   outline-offset: 3px;
-  border-radius: 999px;
-}
-
-/* Optional: nicer scroll behavior for anchor jumps */
-html {
-  scroll-padding-top: var(--topbar-h);
 }

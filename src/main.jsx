@@ -22,6 +22,7 @@ createRoot(document.getElementById("root")).render(
         <Route element={<Layout />}>
           <Route path="/" element={<App />} />
           <Route path="/glossary" element={<GlossaryMain />} />
+          <Route path="/glossary-detail/:id" element={<GlossaryDisplayPage />} />
           <Route path="/cultural-map" element={<CulturalMapMain />} />
           <Route path="/story" element={<StoriesMain />} />
           <Route path="/story/:articleID" element={<ArticleDisplay />} />

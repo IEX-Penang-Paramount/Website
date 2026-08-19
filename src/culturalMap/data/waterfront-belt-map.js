@@ -9,7 +9,7 @@ const waterfrontBelt = {
     "The coastal stretch along the Penang Strait, where stilt-house clan " +
     "jetties and grand merchant mansions reflect George Town's history as " +
     "a major trading port.",
-  children: ["cheong-fatt-tze", "chew-jetty"],
+  children: ["cheong-fatt-tze", "chew-jetty", "clan-jetties-area"],
 };
 
 export default waterfrontBelt;

@@ -6,6 +6,7 @@ import armenianStreet from "./armenian-street-map.js";
 import kapitanKeling from "./kapitan-keling-map.js";
 import cheongFattTze from "./cheong-fatt-tze-map.js";
 import chewJetty from "./chew-jetty-map.js";
+import clanJettiesArea from "./clan-jetties-area-map.js";
 
 export const CATEGORIES = {
   "clan-house": { label: "Clan House", color: "var(--color-terracotta)" },
@@ -24,6 +25,7 @@ const ALL_PINS = [
   kapitanKeling,
   cheongFattTze,
   chewJetty,
+  clanJettiesArea,
 ];
 
 const PIN_REGISTRY = new Map(ALL_PINS.map((p) => [p.id, p]));

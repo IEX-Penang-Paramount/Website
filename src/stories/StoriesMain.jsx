@@ -1,5 +1,6 @@
 import PageHeader from "../components/ui/PageHeader.jsx";
-import EmptyState from "../components/ui/EmptyState.jsx";
+import FeatureBoard from "./FeatureBoard.jsx";
+import SearchList from "./SearchList.jsx";
 import { getNavItem } from "../config/navigation.js";
 
 const NAV = getNavItem("/story");
@@ -17,7 +18,8 @@ function StoriesMain() {
             who spoke, when the recording was made, and which places and terms
             it touches.
           </p>
-          <EmptyState message="Story chapters are being transcribed." />
+
+          <FeatureBoard />
         </div>
       </section>
     </>

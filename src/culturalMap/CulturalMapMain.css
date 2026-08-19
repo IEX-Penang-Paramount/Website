@@ -1,0 +1,14 @@
+.cultural-map-section {
+  position: relative;
+  height: calc(100vh - var(--topbar-h) - 200px);
+  min-height: 500px;
+  margin: 0 var(--space-5) var(--space-8);
+}
+
+@media (max-width: 720px) {
+  .cultural-map-section {
+    height: 70vh;
+    min-height: 400px;
+    margin: 0 var(--space-3) var(--space-6);
+  }
+}

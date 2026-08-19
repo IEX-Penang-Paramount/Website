@@ -1,0 +1,8 @@
+.map-area {
+  --area-fill-opacity-hover: 0.3;
+  cursor: pointer;
+}
+
+.map-area:hover {
+  fill-opacity: var(--area-fill-opacity-hover);
+}

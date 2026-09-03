@@ -1,22 +1,117 @@
-/* Subpage title band — flat sand fill, separated by a hairline rule. */
+/* Subpage header — a field note with a stamped brush mark. */
 
 .page-header {
-  padding: var(--space-7) 0;
+  position: relative;
+  overflow: hidden;
+  padding: clamp(3.5rem, 9vw, 7rem) 0 var(--space-7);
   background: var(--color-sand-alt);
   border-bottom: 1px solid var(--color-rule);
 }
 
+/* The brush glyph, stamped large and low-contrast into the top-right. */
+.page-header__mark {
+  position: absolute;
+  right: clamp(-1rem, 2vw, 3rem);
+  top: 50%;
+  transform: translateY(-52%) rotate(-5deg);
+  font-family: var(--font-brush);
+  font-size: clamp(9rem, 24vw, 20rem);
+  line-height: 0.8;
+  color: var(--color-terracotta);
+  opacity: 0.14;
+  pointer-events: none;
+  user-select: none;
+}
+
+.page-header__inner {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--space-6);
+  flex-wrap: wrap;
+}
+
+.page-header__lede {
+  max-width: 44rem;
+}
+
+.page-header__eyebrow {
+  margin: 0 0 var(--space-4);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-terracotta-dk);
+}
+
 .page-header__title {
   margin: 0;
-  font-size: var(--text-2xl);
-  line-height: var(--leading-tight);
+  font-family: var(--font-display);
+  font-size: var(--text-3xl);
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
+  line-height: 0.96;
   color: var(--color-navy);
 }
 
 .page-header__subtitle {
   max-width: var(--measure);
-  margin: var(--space-3) 0 0;
+  margin: var(--space-4) 0 0;
   font-size: var(--text-lg);
   line-height: var(--leading-normal);
   color: var(--color-ink-muted);
+}
+
+.page-header__lead {
+  max-width: var(--measure);
+  margin: var(--space-5) 0 0;
+  font-size: var(--text-xl);
+  line-height: 1.4;
+  color: var(--color-ink);
+}
+
+.page-header__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-6);
+  margin: var(--space-6) 0 0;
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--color-rule);
+}
+
+.page-header__meta dt {
+  font-family: var(--font-mono);
+  font-size: 0.64rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-ink-muted);
+}
+
+.page-header__meta dd {
+  margin: var(--space-1) 0 0;
+  font-family: var(--font-display);
+  font-size: var(--text-xl);
+  font-weight: 700;
+  color: var(--color-navy);
+  font-variant-numeric: tabular-nums;
+}
+
+.page-header__aside {
+  flex: 0 1 auto;
+}
+
+@media (max-width: 720px) {
+  .page-header__inner {
+    align-items: stretch;
+  }
+  .page-header__mark {
+    top: auto;
+    bottom: -2rem;
+    right: -1rem;
+    transform: rotate(-5deg);
+    opacity: 0.1;
+  }
 }

@@ -9,11 +9,11 @@ import chewJetty from "./chew-jetty-map.js";
 import clanJettiesArea from "./clan-jetties-area-map.js";
 
 export const CATEGORIES = {
-  "clan-house": { label: "Clan House", color: "var(--color-terracotta)" },
-  mansion: { label: "Heritage Mansion", color: "var(--color-teal)" },
-  "street-art": { label: "Street Art & Culture", color: "var(--color-navy)" },
-  waterfront: { label: "Waterfront & Jetties", color: "#b07a3a" },
-  religious: { label: "Temple & Mosque", color: "#7a5c3a" },
+  "clan-house": { label: "Clan House", color: "#a94f30" },
+  mansion: { label: "Heritage Mansion", color: "#395a55" },
+  "street-art": { label: "Street Art & Culture", color: "#1c2926" },
+  waterfront: { label: "Waterfront & Jetties", color: "#8a6a41" },
+  religious: { label: "Temple & Mosque", color: "#6a5f7e" },
 };
 
 const ALL_PINS = [

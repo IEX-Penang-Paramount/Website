@@ -1,25 +1,24 @@
 import PageHeader from "../components/ui/PageHeader.jsx";
-import FeatureBoard from "./FeatureBoard.jsx";
-import SearchList from "./SearchList.jsx";
-import { getNavItem } from "../config/navigation.js";
-
-const NAV = getNavItem("/story");
+import RecordingIndex from "./RecordingIndex.jsx";
+import { stories } from "./Assets/StoryData.js";
 
 function StoriesMain() {
   return (
     <>
-      <PageHeader title={NAV.label} subtitle={NAV.description} />
+      <PageHeader
+        eyebrow="Oral history · 口述记录"
+        title="The Voices"
+        mark="声"
+        lead="Accounts kept close to the way they were told. Each recording notes who spoke, when it was made, and which places and terms it touches."
+        meta={[
+          { k: "Recordings", v: String(stories.length) },
+          { k: "Recorded", v: "2025" },
+        ]}
+      />
 
       <section className="section">
         <div className="container">
-          <p className="prose">
-            Accounts are kept close to the way they were told, with editing
-            limited to what a reader needs to follow them. Each chapter notes
-            who spoke, when the recording was made, and which places and terms
-            it touches.
-          </p>
-
-          <FeatureBoard />
+          <RecordingIndex />
         </div>
       </section>
     </>

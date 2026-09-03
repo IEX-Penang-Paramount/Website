@@ -12,6 +12,7 @@
 html {
   /* Anchor links land below the fixed top bar instead of behind it. */
   scroll-padding-top: var(--topbar-h);
+  scroll-behavior: smooth;
 }
 
 body {
@@ -32,7 +33,9 @@ h1,
 h2,
 h3,
 h4 {
-  font-weight: 600;
+  font-family: var(--font-display);
+  font-weight: 700;
+  letter-spacing: 0.005em;
 }
 
 a {
@@ -40,7 +43,49 @@ a {
   text-decoration: none;
 }
 
+/* Uppercase mono label — eyebrows, tags, field-note metadata. */
+.label {
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  letter-spacing: var(--label-tracking);
+  text-transform: uppercase;
+  color: var(--color-ink-muted);
+}
+
 img {
   max-width: 100%;
   display: block;
+}
+
+/* ---------- Scroll-reveal + route transition ----------
+   Elements tagged [data-reveal] start dimmed and slid down a touch; Layout.jsx
+   adds .is-in as they enter the viewport. */
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity 0.6s var(--ease-out), transform 0.6s var(--ease-out);
+  transition-delay: var(--reveal-delay, 0s);
+  will-change: opacity, transform;
+}
+
+[data-reveal].is-in {
+  opacity: 1;
+  transform: none;
+}
+
+/* Each routed page fades up briefly when it mounts. */
+.route-fade {
+  animation: route-in 0.4s var(--ease-out) both;
+}
+
+@keyframes route-in {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  [data-reveal] { opacity: 1; transform: none; transition: none; }
+  .route-fade { animation: none; }
 }

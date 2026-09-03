@@ -25,9 +25,9 @@
   align-items: center;
 
   color: var(--color-ink-muted);
-  font-weight: 600;
-  font-size: var(--text-sm);
-  letter-spacing: 0.3px;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
 
   padding: var(--space-2) var(--space-3);

@@ -1,4 +1,5 @@
-/* Fixed top bar — flat navy, unaffected by page scroll. */
+/* Fixed top bar — deep water, mono tabs, unaffected by page scroll.
+   Reads like the header of a field log. */
 
 .topbar {
   position: fixed;
@@ -28,9 +29,11 @@
 /* ---------- Brand (text only — no logo mark) ---------- */
 
 .topbar__brand {
-  font-size: var(--text-base);
-  font-weight: 600;
-  letter-spacing: 0.02em;
+  font-family: var(--font-display);
+  font-size: var(--text-lg);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
   color: var(--color-on-dark);
   white-space: nowrap;
 }
@@ -40,18 +43,21 @@
 .topbar__nav {
   display: flex;
   align-items: center;
-  gap: var(--space-5);
+  gap: var(--space-6);
 }
 
 .topbar__tab {
-  padding: var(--space-1) 0;
+  padding: var(--space-2) 0;
 
-  font-size: var(--text-sm);
-  font-weight: 500;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 400;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
   white-space: nowrap;
   color: var(--color-on-dark-muted);
 
-  border-bottom: 2px solid transparent;
+  border-bottom: 1px solid transparent;
   transition: color var(--transition), border-color var(--transition);
 }
 
@@ -61,7 +67,6 @@
 }
 
 .topbar__tab--active {
-  font-weight: 600;
   color: var(--color-on-dark);
   border-bottom-color: var(--color-terracotta);
 }
@@ -79,14 +84,13 @@
     flex-direction: column;
     align-items: stretch;
     justify-content: center;
-    gap: var(--space-3);
+    gap: var(--space-2);
     padding: var(--space-3) var(--space-4);
   }
 
   .topbar__nav {
-    gap: var(--space-4);
+    gap: var(--space-5);
     overflow-x: auto;
-    /* Room for the underline and focus ring inside the scroll area. */
     padding-bottom: var(--space-1);
   }
 }

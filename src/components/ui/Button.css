@@ -1,11 +1,14 @@
-/* Flat action links — solid fills, no gradients, no icons. */
+/* Flat action links — mono labels, solid fills, sharp corners. */
 
 .btn {
   display: inline-block;
   padding: var(--space-3) var(--space-5);
 
-  font-size: var(--text-sm);
-  font-weight: 600;
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
   text-align: center;
 
   border: 1px solid transparent;
@@ -28,7 +31,7 @@
   background: var(--color-terracotta-dk);
 }
 
-/* Sits on the navy hero, so it borrows the surrounding text colour. */
+/* Sits on a deep-water band, so it borrows the surrounding text colour. */
 .btn--secondary {
   background: transparent;
   border-color: currentColor;

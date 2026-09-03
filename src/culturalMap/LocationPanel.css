@@ -2,24 +2,21 @@
   position: absolute;
   top: 0;
   right: 0;
-  width: 340px;
+  width: 360px;
   height: 100%;
   overflow-y: auto;
   background: var(--color-surface);
+  color: var(--color-ink);
   border-left: 1px solid var(--color-rule);
-  box-shadow: -4px 0 16px rgba(27, 58, 75, 0.1);
-  padding: var(--space-5);
+  box-shadow: -8px 0 24px rgba(27, 45, 48, 0.1);
+  padding: var(--space-6) var(--space-5);
   z-index: 1000;
   animation: panel-in 300ms ease-out both;
 }
 
 @keyframes panel-in {
-  from {
-    transform: translateX(100%);
-  }
-  to {
-    transform: translateX(0);
-  }
+  from { transform: translateX(100%); }
+  to { transform: translateX(0); }
 }
 
 .loc-panel__close {
@@ -42,36 +39,43 @@
 }
 
 .loc-panel__close:hover {
-  background: var(--color-sand);
+  background: var(--color-sand-alt);
   color: var(--color-ink);
 }
 
 .loc-panel__badge {
   display: inline-block;
-  padding: 2px 10px;
-  border-radius: 999px;
-  font-size: 12px;
-  font-weight: 600;
-  color: var(--color-on-accent);
-  letter-spacing: 0.02em;
-  margin-bottom: var(--space-3);
+  padding: 3px 9px;
+  border: 1px solid currentColor;
+  border-radius: var(--radius);
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  background: transparent;
+  margin-bottom: var(--space-4);
 }
 
 .loc-panel__title {
   margin: 0 0 var(--space-1);
-  font-size: var(--text-xl);
+  font-family: var(--font-display);
+  font-size: var(--text-2xl);
+  font-weight: 800;
+  text-transform: uppercase;
   line-height: var(--leading-tight);
   color: var(--color-navy);
 }
 
 .loc-panel__title-zh {
   margin: 0 0 var(--space-4);
+  font-family: var(--font-cjk);
   font-size: var(--text-base);
   color: var(--color-ink-muted);
 }
 
 .loc-panel__desc {
-  font-size: var(--text-sm);
+  font-size: var(--text-base);
   line-height: var(--leading-normal);
   color: var(--color-ink);
   margin: 0 0 var(--space-5);
@@ -85,7 +89,10 @@
 }
 
 .loc-panel__meta dt {
-  font-weight: 600;
+  font-family: var(--font-mono);
+  font-size: 0.64rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
   color: var(--color-ink-muted);
   margin-bottom: var(--space-1);
 }
@@ -95,7 +102,6 @@
   color: var(--color-ink);
 }
 
-/* Navigate (drill-down) button for super-pins */
 .loc-panel__navigate {
   display: block;
   width: 100%;
@@ -104,16 +110,18 @@
   border-radius: var(--radius);
   background: var(--color-navy);
   color: var(--color-on-accent);
-  font-size: var(--text-sm);
-  font-weight: 600;
-  font-family: var(--font-sans);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
   cursor: pointer;
-  margin-top: var(--space-4);
-  transition: opacity var(--transition);
+  margin-top: var(--space-5);
+  transition: background var(--transition);
 }
 
 .loc-panel__navigate:hover {
-  opacity: 0.85;
+  background: var(--color-navy-deep);
 }
 
 /* Mobile: bottom sheet */
@@ -125,20 +133,16 @@
     right: 0;
     width: 100%;
     height: auto;
-    max-height: 60%;
+    max-height: 62%;
     border-left: none;
     border-top: 1px solid var(--color-rule);
     border-radius: var(--radius) var(--radius) 0 0;
-    box-shadow: 0 -4px 16px rgba(27, 58, 75, 0.1);
+    box-shadow: 0 -8px 24px rgba(27, 45, 48, 0.14);
     animation-name: panel-in-mobile;
   }
 
   @keyframes panel-in-mobile {
-    from {
-      transform: translateY(100%);
-    }
-    to {
-      transform: translateY(0);
-    }
+    from { transform: translateY(100%); }
+    to { transform: translateY(0); }
   }
 }

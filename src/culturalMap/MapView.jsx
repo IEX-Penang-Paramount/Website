@@ -34,9 +34,15 @@ function MapView({ items, selectedItem, onSelectItem, navStack }) {
       className="cultural-map"
       zoomControl={false}
     >
+      {/* Esri "World Light Gray" — a clean, muted light base map, free, no key. */}
       <TileLayer
-        attribution='&copy; <a href="https://carto.com/">CARTO</a>'
-        url="https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png"
+        attribution='Tiles &copy; Esri'
+        url="https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}"
+        maxZoom={16}
+      />
+      <TileLayer
+        url="https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Reference/MapServer/tile/{z}/{y}/{x}"
+        maxZoom={16}
       />
 
       {items.map((item, i) => (

@@ -5,7 +5,7 @@ const waterfrontBelt = {
   nameZh: "海滨地带",
   lat: 5.412,
   lng: 100.34,
-  color: "var(--color-teal)",
+  color: "#395a55",
   shortDescription:
     "The coastal stretch along the Penang Strait, where stilt-house clan " +
     "jetties and grand merchant mansions reflect George Town's history as " +

@@ -5,7 +5,7 @@ const clanJettiesArea = {
   nameZh: "姓氏桥",
   lat: 5.4045,
   lng: 100.3435,
-  color: "#b07a3a",
+  color: "#8a6a41",
   shortDescription:
     "A cluster of waterfront stilt-house settlements built by Chinese " +
     "immigrant clans in the 19th century. Each jetty bears the surname " +

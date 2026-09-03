@@ -5,7 +5,7 @@ const heritageCore = {
   nameZh: "文化核心区",
   lat: 5.4155,
   lng: 100.337,
-  color: "var(--color-terracotta)",
+  color: "#a94f30",
   shortDescription:
     "The historic heart of George Town, where centuries-old clan houses, " +
     "street art, and religious landmarks sit side by side along narrow lanes " +

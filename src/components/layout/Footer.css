@@ -1,4 +1,4 @@
-/* Site footer — flat navy, matching the top bar. */
+/* Site footer — deep water, matching the top bar. */
 
 .footer {
   background: var(--color-navy);
@@ -17,7 +17,10 @@
 }
 
 .footer__copy {
-  font-size: var(--text-sm);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
   color: var(--color-on-dark-muted);
 }
 
@@ -27,7 +30,10 @@
 }
 
 .footer__link {
-  font-size: var(--text-sm);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
   color: var(--color-on-dark-muted);
   transition: color var(--transition);
 }

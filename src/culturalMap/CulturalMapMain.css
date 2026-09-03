@@ -1,14 +1,170 @@
+/* Cultural map page — map alongside a site index. */
+
+.section--tight {
+  padding-top: var(--space-6);
+  padding-bottom: 0;
+}
+
+/* ---------- Legend ---------- */
+.map-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-4);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.map-legend li {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-ink-muted);
+}
+
+.map-legend__dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 1px solid var(--color-surface);
+}
+
+/* ---------- Layout: map + index ---------- */
+.map-layout {
+  display: grid;
+  grid-template-columns: 1fr 20rem;
+  gap: var(--space-4);
+  padding: var(--space-5) var(--space-5) var(--space-8);
+  max-width: var(--container-max);
+  margin: 0 auto;
+  align-items: stretch;
+}
+
 .cultural-map-section {
   position: relative;
-  height: calc(100vh - var(--topbar-h) - 200px);
-  min-height: 500px;
-  margin: 0 var(--space-5) var(--space-8);
+  height: calc(100vh - 220px);
+  min-height: 520px;
+  border: 1px solid var(--color-rule);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+/* ---------- Site index ---------- */
+.site-index {
+  border: 1px solid var(--color-rule);
+  border-radius: var(--radius);
+  background: var(--color-surface);
+  overflow-y: auto;
+  max-height: calc(100vh - 220px);
+}
+
+.site-index__caption {
+  margin: 0;
+  padding: var(--space-3) var(--space-4);
+  border-bottom: 1px solid var(--color-rule);
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-ink-muted);
+}
+
+.site-index__group + .site-index__group {
+  border-top: 1px solid var(--color-rule);
+}
+
+.site-index__head {
+  width: 100%;
+  text-align: left;
+  padding: var(--space-4) var(--space-4) var(--space-3);
+  border: none;
+  background: var(--color-sand-alt);
+  cursor: pointer;
+
+  font-family: var(--font-display);
+  font-size: var(--text-base);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  color: var(--color-navy);
+}
+
+.site-index__head:hover { color: var(--color-terracotta-dk); }
+
+.site-index__zh {
+  font-family: var(--font-cjk);
+  font-weight: 400;
+  text-transform: none;
+  color: var(--color-ink-muted);
+}
+
+.site-index ul {
+  list-style: none;
+  margin: 0;
+  padding: var(--space-2) 0 var(--space-3);
+}
+
+.site-index__site {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1.6rem 10px 1fr;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-2) var(--space-4);
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  text-align: left;
+
+  font-size: var(--text-sm);
+  color: var(--color-ink);
+  transition: background var(--transition);
+}
+
+.site-index__site:hover { background: var(--color-sand-alt); }
+.site-index__site:focus-visible { outline: 2px solid var(--color-terracotta); outline-offset: -2px; }
+
+.site-index__site--on {
+  background: var(--color-sand-alt);
+  font-weight: 600;
+  box-shadow: inset 3px 0 0 var(--color-terracotta);
+}
+
+.site-index__no {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  color: var(--color-ink-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.site-index__dot {
+  flex: none;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+}
+
+.site-index__more { color: var(--color-ink-muted); }
+
+@media (max-width: 900px) {
+  .map-layout {
+    grid-template-columns: 1fr;
+  }
+  .cultural-map-section {
+    height: 62vh;
+    min-height: 420px;
+  }
+  .site-index {
+    max-height: 22rem;
+  }
 }
 
 @media (max-width: 720px) {
-  .cultural-map-section {
-    height: 70vh;
-    min-height: 400px;
-    margin: 0 var(--space-3) var(--space-6);
+  .map-layout {
+    padding: var(--space-4) var(--space-3) var(--space-6);
   }
 }

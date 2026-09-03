@@ -12,21 +12,21 @@ const Template = {
 export const stories = [
   {
     articleID: "A1",
-    title: "Ipsium Lopium I don't know",
+    title: "Story of Mr. Tan",
     abstract: "This is a test abstract",
     abstractQuote: "This is a test quote",
-    author: "Anxinal",
-    time: "2026-08-15",
-  },
-  {
+    author: "Junde",
+    time: "2026-09-02",
+},
+    {
     articleID: "A2",
-    title: "Ipsium Lopium I don't know 2",
+    title: "Story of Mr. Tay",
     abstract: "This is a test abstract 2",
     abstractQuote: "This is a test quote 2",
-    author: "Anxinal",
-    time: "2026-08-16",
-  },
-  {
+    author: "Junde",
+    time: "2026-09-01",
+},
+    {
     articleID: "A3",
     title: "Ipsium Lopium I don't know 3",
     abstract: "This is a test abstract 3",

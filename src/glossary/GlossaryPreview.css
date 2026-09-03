@@ -12,9 +12,9 @@
 
 /* Word title */
 .wordFrame {
+  font-family: var(--font-cjk);
   font-weight: 700;
-  letter-spacing: -0.01em;
-  font-size: var(--text-base);
+  font-size: var(--text-lg);
   line-height: var(--leading-tight);
   color: var(--color-navy);
 

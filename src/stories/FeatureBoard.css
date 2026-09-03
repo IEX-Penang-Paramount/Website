@@ -1,59 +1,52 @@
-/* Feature board — 3-card grid showcasing random stories */
+/* Feature board — a small grid of recordings, drawn from the story set. */
 
 .feature-board {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: var(--space-5);
+  gap: 1px;
+  margin-top: var(--space-6);
+  background: var(--color-rule);
+  border: 1px solid var(--color-rule);
 }
 
 .feature-card {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  gap: var(--space-4);
   padding: var(--space-5);
-  min-height: 180px;
+  min-height: 200px;
 
   background: var(--color-surface);
-  border: 1px solid var(--color-rule);
-  border-radius: var(--radius);
-  box-shadow: var(--shadow-sm);
-
-  cursor: pointer;
   text-decoration: none;
   color: inherit;
-  transition: border-color var(--transition), transform var(--transition);
+  transition: background var(--transition);
 }
 
 .feature-card:hover {
-  border-color: var(--color-teal);
-  transform: translateY(-2px);
+  background: var(--color-sand-alt);
 }
 
 .feature-card:focus-visible {
   outline: 2px solid var(--color-terracotta);
-  outline-offset: 3px;
+  outline-offset: -2px;
 }
 
 .feature-card__quote {
   margin: 0;
+  font-family: var(--font-cjk);
   font-size: var(--text-lg);
-  font-style: italic;
   line-height: var(--leading-normal);
   color: var(--color-navy);
 }
 
-.feature-card__quote::before {
-  content: "\201C";
-}
-
-.feature-card__quote::after {
-  content: "\201D";
-}
-
 .feature-card__title {
-  margin: var(--space-4) 0 0;
-  font-size: var(--text-sm);
-  font-weight: 600;
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
   color: var(--color-ink-muted);
 }
 

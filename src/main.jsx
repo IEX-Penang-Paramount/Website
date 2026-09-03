@@ -19,8 +19,10 @@ createRoot(document.getElementById("root")).render(
   <StrictMode>
     <BrowserRouter basename="/Website">
       <Routes>
+        {/* The landing is a full-bleed immersive scene — it carries its own
+            chrome, so it renders outside the shared Layout. */}
+        <Route path="/" element={<App />} />
         <Route element={<Layout />}>
-          <Route path="/" element={<App />} />
           <Route path="/glossary" element={<GlossaryMain />} />
           <Route path="/glossary-detail/:id" element={<GlossaryDisplayPage />} />
           <Route path="/cultural-map" element={<CulturalMapMain />} />

@@ -4,7 +4,7 @@
   border-radius: 50%;
   background: var(--pin-color);
   border: 2px solid var(--color-surface);
-  box-shadow: 0 2px 6px rgba(27, 58, 75, 0.3);
+  box-shadow: 0 2px 6px rgba(27, 45, 48, 0.3);
   cursor: pointer;
   transition: transform var(--transition), box-shadow var(--transition);
   animation: pin-drop 400ms ease-out both;
@@ -47,7 +47,7 @@
   width: 32px;
   height: 32px;
   border-width: 3px;
-  box-shadow: 0 2px 10px rgba(27, 58, 75, 0.35);
+  box-shadow: 0 2px 10px rgba(27, 45, 48, 0.35);
 }
 
 .map-pin--super:hover {

@@ -5,11 +5,14 @@
   margin: var(--space-5) 0 0;
   padding: var(--space-7) var(--space-5);
 
-  font-size: var(--text-base);
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
   text-align: center;
   color: var(--color-ink-muted);
 
-  background: var(--color-surface);
+  background: var(--color-sand-alt);
   border: 1px dashed var(--color-rule);
   border-radius: var(--radius);
 }

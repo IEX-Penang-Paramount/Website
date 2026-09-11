@@ -1,12 +1,31 @@
 import root from "./_root-map.js";
 import heritageCore from "./heritage-core-map.js";
 import waterfrontBelt from "./waterfront-belt-map.js";
-import khooKongsi from "./khoo-kongsi-map.js";
-import armenianStreet from "./armenian-street-map.js";
-import kapitanKeling from "./kapitan-keling-map.js";
-import cheongFattTze from "./cheong-fatt-tze-map.js";
-import chewJetty from "./chew-jetty-map.js";
-import clanJettiesArea from "./clan-jetties-area-map.js";
+
+import fishingAreaPresent from "./fishing-area-present-map.js";
+import fishingUnitPresent from "./fishing-unit-present-map.js";
+import firstPenangBridge from "./first-penang-bridge-map.js";
+import secondPenangBridge from "./second-penang-bridge-map.js";
+import reclaimedAreaStp2 from "./reclaimed-area-stp2-map.js";
+import fishCatchPoint1 from "./fish-catch-point-1-map.js";
+import fishCatchPoint2 from "./fish-catch-point-2-map.js";
+import northernStreetPresent from "./northern-street-present-map.js";
+import sandDriller from "./sand-driller-map.js";
+import oceanGreenRestaurantPresent from "./ocean-green-restaurant-present-map.js";
+import eoHotel from "./eo-hotel-map.js";
+import futureSandDrillingPoint from "./future-sand-drilling-point-map.js";
+import fishingArea2 from "./fishing-area-2-map.js";
+import fishingUnitPerimeterPresent from "./fishing-unit-perimeter-present-map.js";
+import shrines from "./shrines-map.js";
+import reclaimedAreaGurneyPark from "./reclaimed-area-gurney-park-map.js";
+import reclaimedAreaStp1 from "./reclaimed-area-stp1-map.js";
+import northernStreetPast from "./northern-street-past-map.js";
+import oceanGreenRestaurantPast from "./ocean-green-restaurant-past-map.js";
+import fishingAreaPast from "./fishing-area-past-map.js";
+import fishingUnitPast from "./fishing-unit-past-map.js";
+import beachPast from "./beach-past-map.js";
+import fishMarketsAndRestaurants from "./fish-markets-and-restaurants-map.js";
+import bungalowHouses from "./bungalow-houses-map.js";
 
 export const CATEGORIES = {
   "clan-house": { label: "Clan House", color: "#a94f30" },
@@ -20,12 +39,31 @@ const ALL_PINS = [
   root,
   heritageCore,
   waterfrontBelt,
-  khooKongsi,
-  armenianStreet,
-  kapitanKeling,
-  cheongFattTze,
-  chewJetty,
-  clanJettiesArea,
+
+  fishingAreaPresent,
+  fishingUnitPresent,
+  firstPenangBridge,
+  secondPenangBridge,
+  reclaimedAreaStp2,
+  fishCatchPoint1,
+  fishCatchPoint2,
+  northernStreetPresent,
+  sandDriller,
+  oceanGreenRestaurantPresent,
+  eoHotel,
+  futureSandDrillingPoint,
+  fishingArea2,
+  fishingUnitPerimeterPresent,
+  shrines,
+  reclaimedAreaGurneyPark,
+  reclaimedAreaStp1,
+  northernStreetPast,
+  oceanGreenRestaurantPast,
+  fishingAreaPast,
+  fishingUnitPast,
+  beachPast,
+  fishMarketsAndRestaurants,
+  bungalowHouses,
 ];
 
 const PIN_REGISTRY = new Map(ALL_PINS.map((p) => [p.id, p]));

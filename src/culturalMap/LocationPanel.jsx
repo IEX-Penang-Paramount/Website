@@ -1,11 +1,11 @@
-import { CATEGORIES, isSuperPin, getPinColor } from "./data/index.js";
+import { CATEGORIES } from "./data/index.js";
 import "./LocationPanel.css";
 
 function LocationPanel({ item, onClose, onNavigate }) {
-  const isSuper = isSuperPin(item);
-  const cat = isSuper ? null : CATEGORIES[item.category];
-  const color = getPinColor(item);
-  const badgeLabel = isSuper ? item.name : cat?.label;
+  const isSuper = !item.isLeaf();
+  const cat = isSuper ? null : CATEGORIES[item.getCategory()];
+  const color = item.getColor();
+  const badgeLabel = isSuper ? item.getName() : cat?.label;
 
   return (
     <aside className="loc-panel">
@@ -20,17 +20,17 @@ function LocationPanel({ item, onClose, onNavigate }) {
         {badgeLabel}
       </span>
 
-      <h2 className="loc-panel__title">{item.name}</h2>
-      {item.nameZh && (
-        <p className="loc-panel__title-zh">{item.nameZh}</p>
+      <h2 className="loc-panel__title">{item.getName()}</h2>
+      {item.getNameZh() && (
+        <p className="loc-panel__title-zh">{item.getNameZh()}</p>
       )}
 
-      <p className="loc-panel__desc">{item.shortDescription}</p>
+      <p className="loc-panel__desc">{item.getShortDescription()}</p>
 
-      {!isSuper && item.address && (
+      {!isSuper && item.getAddress() && (
         <dl className="loc-panel__meta">
           <dt>Address</dt>
-          <dd>{item.address}</dd>
+          <dd>{item.getAddress()}</dd>
         </dl>
       )}
 

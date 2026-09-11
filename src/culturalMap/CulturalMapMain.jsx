@@ -1,19 +1,13 @@
 import { useState, useMemo } from "react";
 import PageHeader from "../components/ui/PageHeader.jsx";
-import {
-  getRootPins,
-  getChildren,
-  isSuperPin,
-  CATEGORIES,
-  getPinColor,
-} from "./data/index.js";
+import { getRoots, CATEGORIES } from "./data/index.js";
 import MapView from "./MapView.jsx";
 import LocationPanel from "./LocationPanel.jsx";
 import BackButton from "./BackButton.jsx";
 import "./CulturalMapMain.css";
 
 function countLeaves(pin) {
-  const kids = getChildren(pin);
+  const kids = pin.getChildren();
   if (kids.length === 0) return 1;
   return kids.reduce((n, k) => n + countLeaves(k), 0);
 }
@@ -22,7 +16,7 @@ function CulturalMapMain() {
   const [navStack, setNavStack] = useState([]);
   const [selectedItem, setSelectedItem] = useState(null);
 
-  const roots = useMemo(() => getRootPins(), []);
+  const roots = useMemo(() => getRoots(), []);
   const totalSites = useMemo(
     () => roots.reduce((n, r) => n + countLeaves(r), 0),
     [roots]
@@ -30,7 +24,7 @@ function CulturalMapMain() {
   const siteNo = useMemo(() => {
     const m = {};
     let i = 0;
-    roots.forEach((g) => getChildren(g).forEach((s) => { m[s.id] = ++i; }));
+    roots.forEach((g) => g.getChildren().forEach((s) => { m[s.getId()] = ++i; }));
     return m;
   }, [roots]);
 
@@ -38,7 +32,7 @@ function CulturalMapMain() {
     () =>
       navStack.length === 0
         ? roots
-        : getChildren(navStack[navStack.length - 1]),
+        : navStack[navStack.length - 1].getChildren(),
     [navStack, roots]
   );
 
@@ -100,35 +94,35 @@ function CulturalMapMain() {
         <nav className="site-index" aria-label="Site index">
           <p className="site-index__caption">Manifest — {totalSites} sites</p>
           {roots.map((group) => (
-            <div className="site-index__group" key={group.id}>
+            <div className="site-index__group" key={group.getId()}>
               <button
                 type="button"
                 className="site-index__head"
                 onClick={() => setSelectedItem(group)}
               >
-                {group.name}
-                {group.nameZh && <span className="site-index__zh"> · {group.nameZh}</span>}
+                {group.getName()}
+                {group.getNameZh() && <span className="site-index__zh"> · {group.getNameZh()}</span>}
               </button>
               <ul>
-                {getChildren(group).map((site) => (
-                  <li key={site.id}>
+                {group.getChildren().map((site) => (
+                  <li key={site.getId()}>
                     <button
                       type="button"
                       className={`site-index__site ${
-                        selectedItem?.id === site.id ? "site-index__site--on" : ""
+                        selectedItem?.getId() === site.getId() ? "site-index__site--on" : ""
                       }`}
                       onClick={() => setSelectedItem(site)}
                     >
                       <span className="site-index__no">
-                        {String(siteNo[site.id]).padStart(2, "0")}
+                        {String(siteNo[site.getId()]).padStart(2, "0")}
                       </span>
                       <span
                         className="site-index__dot"
-                        style={{ background: getPinColor(site) }}
+                        style={{ background: site.getColor() }}
                       />
                       <span className="site-index__name">
-                        {site.name}
-                        {isSuperPin(site) && (
+                        {site.getName()}
+                        {!site.isLeaf() && (
                           <span className="site-index__more"> ›</span>
                         )}
                       </span>

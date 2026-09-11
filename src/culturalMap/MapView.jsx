@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { MapContainer, TileLayer, useMap } from "react-leaflet";
-import MapObject from "./MapObject.jsx";
+import MapObjectComponent from "./MapObjectComponent.jsx";
 import "leaflet/dist/leaflet.css";
 import "./MapView.css";
 
@@ -13,9 +13,9 @@ function FlyToHandler({ selectedItem, navStack }) {
 
   useEffect(() => {
     if (selectedItem) {
-      map.flyTo([selectedItem.lat, selectedItem.lng], 17, { duration: 1.2 });
+      map.flyTo([selectedItem.getLat(), selectedItem.getLng()], 17, { duration: 1.2 });
     } else if (currentParent) {
-      map.flyTo([currentParent.lat, currentParent.lng], 16, {
+      map.flyTo([currentParent.getLat(), currentParent.getLng()], 16, {
         duration: 1.0,
       });
     } else {
@@ -46,11 +46,11 @@ function MapView({ items, selectedItem, onSelectItem, navStack }) {
       />
 
       {items.map((item, i) => (
-        <MapObject
-          key={item.id}
+        <MapObjectComponent
+          key={item.getId()}
           location={item}
           index={i}
-          isSelected={selectedItem?.id === item.id}
+          isSelected={selectedItem?.getId() === item.getId()}
           onSelect={onSelectItem}
         />
       ))}

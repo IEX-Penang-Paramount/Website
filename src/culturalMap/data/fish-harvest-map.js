@@ -11,7 +11,7 @@ const fishHarvest = {
   name: "Fish harvest",
   lat: 5.44148,
   lng: 100.3410953,
-  shortDescription: "",
+  shortDescription: "The fish harvest during the past and the present, according to the fishing unit, has changed and declined over time. It is a significant indicator of the health of the marine ecosystem and the community's livelihood.",
   // Areas first, largest to smallest: later areas are drawn on top, so
   // smaller overlapping areas stay clickable.
   children: [

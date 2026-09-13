@@ -10,7 +10,6 @@ import secondPenangBridge from "./second-penang-bridge-map.js";
 import northernStreetPresent from "./northern-street-present-map.js";
 import eoHotel from "./eo-hotel-map.js";
 import northernStreetPast from "./northern-street-past-map.js";
-import beachPast from "./beach-past-map.js";
 import fishMarketsAndRestaurants from "./fish-markets-and-restaurants-map.js";
 import bungalowHouses from "./bungalow-houses-map.js";
 
@@ -25,13 +24,11 @@ const ROOTS = Object.freeze(
     fishHarvest,
     landReclamationEfforts,
     theCommunity,
-
     firstPenangBridge,
     secondPenangBridge,
     northernStreetPresent,
     eoHotel,
     northernStreetPast,
-    beachPast,
     fishMarketsAndRestaurants,
     bungalowHouses,
   ].map(createMapObject)

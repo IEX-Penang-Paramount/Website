@@ -7,6 +7,12 @@ import "./MapView.css";
 const CENTER = [5.414, 100.339];
 const DEFAULT_ZOOM = 15;
 
+// The Esri service only has tiles down to zoom 16, and Leaflet hides a tile
+// layer entirely above its maxZoom. Selecting an item flies to zoom 17, which
+// blanked the base map; maxNativeZoom keeps it drawn by scaling zoom-16 tiles.
+const TILE_MAX_NATIVE_ZOOM = 16;
+const TILE_MAX_ZOOM = 18;
+
 function FlyToHandler({ selectedItem, navStack }) {
   const map = useMap();
   const currentParent = navStack[navStack.length - 1] || null;
@@ -38,11 +44,13 @@ function MapView({ items, selectedItem, onSelectItem, navStack }) {
       <TileLayer
         attribution='Tiles &copy; Esri'
         url="https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}"
-        maxZoom={16}
+        maxNativeZoom={TILE_MAX_NATIVE_ZOOM}
+        maxZoom={TILE_MAX_ZOOM}
       />
       <TileLayer
         url="https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Reference/MapServer/tile/{z}/{y}/{x}"
-        maxZoom={16}
+        maxNativeZoom={TILE_MAX_NATIVE_ZOOM}
+        maxZoom={TILE_MAX_ZOOM}
       />
 
       {items.map((item, i) => (

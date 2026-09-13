@@ -1,0 +1,82 @@
+/* Period switch — one segmented bar, stamped into the page header. The number
+   of segments comes from the data, so nothing here may assume exactly two. */
+
+.period-filter {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.period-filter__label {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-ink-muted);
+}
+
+.period-filter__bar {
+  display: flex;
+  border: 1px solid var(--color-rule);
+  border-radius: var(--radius);
+  background: var(--color-surface);
+  overflow: hidden;
+}
+
+.period-filter__btn {
+  min-height: 32px;
+  padding: var(--space-2) var(--space-4);
+  border: none;
+  background: transparent;
+  color: var(--color-ink-muted);
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background var(--transition), color var(--transition);
+}
+
+.period-filter__btn + .period-filter__btn {
+  border-left: 1px solid var(--color-rule);
+}
+
+.period-filter__btn:hover {
+  background: var(--color-sand-alt);
+  color: var(--color-ink);
+}
+
+.period-filter__btn--on,
+.period-filter__btn--on:hover {
+  background: var(--color-navy);
+  color: var(--color-on-accent);
+  font-weight: 500;
+}
+
+/* The bar clips its overflow, so keep the focus ring inside the hairline. */
+.period-filter__btn:focus-visible {
+  position: relative;
+  z-index: 1;
+  outline: 2px solid var(--color-terracotta);
+  outline-offset: -2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .period-filter__btn {
+    transition: none;
+  }
+}
+
+@media (max-width: 720px) {
+  .period-filter {
+    width: 100%;
+  }
+  .period-filter__bar {
+    flex: 1;
+  }
+  .period-filter__btn {
+    flex: 1;
+    text-align: center;
+  }
+}

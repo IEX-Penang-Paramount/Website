@@ -1,4 +1,5 @@
 import { createMapObject } from "./MapObject.js";
+import { PERIODS, ALL_PERIODS, comparePeriods } from "./periods.js";
 
 import fishingAreaPast from "./fishing-area-past-map.js";
 import fishingAreaPresent from "./fishing-area-present-map.js";
@@ -26,6 +27,7 @@ import fishMarketsAndRestaurants from "./fish-markets-and-restaurants-map.js";
 import bungalowHouses from "./bungalow-houses-map.js";
 
 export { CATEGORIES } from "./categories.js";
+export { ALL_PERIODS, matchesPeriod } from "./periods.js";
 
 // Top-level map objects only; each one builds its own children.
 // Areas first, largest to smallest: later areas are drawn on top, so
@@ -62,4 +64,26 @@ const ROOTS = Object.freeze(
 
 export function getRoots() {
   return ROOTS;
+}
+
+function collectPeriods(items, found = new Set()) {
+  items.forEach((item) => {
+    if (item.getPeriod()) found.add(item.getPeriod());
+    collectPeriods(item.getChildren(), found);
+  });
+  return found;
+}
+
+// Every period present in the data, never a hardcoded pair. Computed once:
+// the tree is frozen and cannot change at runtime. The buttons uppercase their
+// text, so a period with no entry in PERIODS reads fine under its own key.
+const FILTER_OPTIONS = Object.freeze([
+  Object.freeze({ key: ALL_PERIODS, label: "All" }),
+  ...[...collectPeriods(ROOTS)]
+    .sort(comparePeriods)
+    .map((key) => Object.freeze({ key, label: PERIODS[key]?.label ?? key })),
+]);
+
+export function getFilterOptions() {
+  return FILTER_OPTIONS;
 }

@@ -70,7 +70,7 @@ export const glossaryData = [
   },
   {
     id: "w7",
-    name: "農曆 (lunar calendar)",
+    name: "农历 (lunar calendar)",
     pDescription:
       "A calendar based on the monthly cycles of the Moon's phases; the fishermen's primary source of tide information.",
     type: 1,

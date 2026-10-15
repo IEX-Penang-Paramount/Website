@@ -1,11 +1,9 @@
-import { CATEGORIES } from "./data/index.js";
 import "./LocationPanel.css";
 
 function LocationPanel({ item, onClose, onNavigate }) {
   const isSuper = !item.isLeaf();
-  const cat = isSuper ? null : CATEGORIES[item.getCategory()];
   const color = item.getColor();
-  const badgeLabel = isSuper ? item.getName() : cat?.label;
+  const badgeLabel = isSuper ? item.getName() : item.getCategoryLabel();
 
   return (
     <aside className="loc-panel">

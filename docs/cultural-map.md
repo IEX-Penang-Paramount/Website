@@ -5,14 +5,11 @@ This guide covers the data architecture and component design of the cultural map
 ## Architecture Overview
 
 ```
-src/culturalMap/
-├── data/                         # All map data lives here
-│   ├── index.js                  # Lists the top-level items; builds the tree
+src/culturalMap/                  # Shared by every project
+├── data/
 │   ├── MapObject.js              # MapObject / MapPin / MapArea data classes
-│   ├── categories.js             # CATEGORIES — label + colour per category
-│   ├── periods.js                # PERIODS — order/label per period, filter rule
-│   ├── shrines-map.js            # Example leaf pin
-│   └── fishing-area-past-map.js  # Example area (polygon)
+│   ├── MapSection.js             # A project's map: builds the tree, derives the periods
+│   └── periods.js                # PERIODS — order/label per period, filter rule
 ├── CulturalMapMain.jsx           # Page orchestrator, state management
 ├── MapView.jsx                   # Map container, renders items + handles fly-to
 ├── MapObjectComponent.jsx        # Picks a renderer from the item's type
@@ -21,6 +18,12 @@ src/culturalMap/
 ├── LocationPanel.jsx             # Side panel showing item details
 ├── PeriodFilter.jsx              # Past / present switcher in the page header
 └── BackButton.jsx                # "← Back" overlay for navigation
+
+src/projects/<project>/data/map/  # One project's map data
+├── index.js                      # centre, zoom, categories, top-level items
+├── categories.js                 # CATEGORIES — label + colour per category
+├── shrines-map.js                # Example leaf pin
+└── fishing-area-past-map.js      # Example area (polygon)
 ```
 
 The `Component` suffix separates the renderers from the **data classes** of the same name: `MapPin` is a data object, `MapPinComponent` draws it.
@@ -30,7 +33,7 @@ The `Component` suffix separates the renderers from the **data classes** of the 
 Every map item flows through a single path:
 
 ```
-data file → index.js (wrapped in a data class) → CulturalMapMain (filtered by period)
+data file → the project's MapSection (wrapped in a data class) → CulturalMapMain (filtered by period)
          → MapView → MapObjectComponent → MapPinComponent or MapAreaComponent
 ```
 
@@ -47,7 +50,7 @@ const Renderer = RENDERERS[location.getType()];
 
 ### Data classes
 
-A data file exports a plain object. `index.js` passes it to `createMapObject()`, which picks a class from the `type` field and returns a **read-only** instance: the fields live in private properties, there are no setters, and the children and coordinates arrays are frozen.
+A data file exports a plain object. `MapSection` passes it to `createMapObject()`, which picks a class from the `type` field and returns a **read-only** instance: the fields live in private properties, there are no setters, and the children and coordinates arrays are frozen.
 
 ```js
 import { createMapObject } from "./MapObject.js";
@@ -62,7 +65,7 @@ Read the data through these methods, never as properties (`item.name` is always 
 
 | Class | Methods |
 |---|---|
-| `MapObject` (base) | `getId` · `getType` · `getPeriod` · `getName` · `getNameZh` · `getLat` · `getLng` · `getCategory` · `getShortDescription` · `getAddress` · `getChildren` · `isLeaf` · `getColor` |
+| `MapObject` (base) | `getId` · `getType` · `getPeriod` · `getName` · `getNameZh` · `getLat` · `getLng` · `getCategoryLabel` · `getShortDescription` · `getAddress` · `getChildren` · `isLeaf` · `getColor` |
 | `MapPin` | the above |
 | `MapArea` | the above plus `getCoordinates` |
 
@@ -73,7 +76,7 @@ Read the data through these methods, never as properties (`item.name` is always 
 Items form a tree. Any item — pin or area — becomes a **super-item** by getting a `children` array, which users can drill into. A parent holds its children's **data objects**, imported directly; the parent's constructor builds them, so each item owns its own subtree.
 
 ```js
-// src/culturalMap/data/fishing-community-map.js
+// src/projects/<project>/data/map/fishing-community-map.js
 import fishingUnitPresent from "./fishing-unit-present-map.js";
 import shrines from "./shrines-map.js";
 
@@ -97,16 +100,15 @@ Super-items are visually distinct: pins render at 36px (vs 20px for leaf pins), 
 
 ### Top-level items
 
-`index.js` lists the items that appear at the top level of the map — there is no root data file:
+The project's `data/map/index.js` lists the items that appear at the top level, with the map's starting view — there is no root data file:
 
 ```js
-const ROOTS = Object.freeze(
-  [
-    fishingAreaPast,
-    fishingAreaPresent,
-    // ...
-  ].map(createMapObject)
-);
+export default {
+  center: [5.414, 100.339],
+  zoom: 15,
+  categories: CATEGORIES,
+  roots: [fishHarvest, landReclamationEfforts, /* ... */],
+};
 ```
 
 **Order matters.** Areas come first, largest to smallest, then pins. Leaflet draws later shapes on top, so listing a large area after a small one would cover the small one and make it unclickable.
@@ -115,7 +117,7 @@ const ROOTS = Object.freeze(
 
 ## Data File Reference
 
-All data files live in `src/culturalMap/data/` as flat JS files. Each file exports a single object via `export default`. The file naming convention is `<id>-map.js`.
+All data files live in `src/projects/<project>/data/map/` as flat JS files. Each file exports a single object via `export default`. The file naming convention is `<id>-map.js`.
 
 ### Pin (type: "pin")
 
@@ -124,7 +126,7 @@ A pin renders as a circular marker on the map.
 Every field a pin can carry:
 
 ```js
-// src/culturalMap/data/<id>-map.js
+// src/projects/<project>/data/map/<id>-map.js
 const myPin = {
   id: "my-pin",               // Unique ID, matches the filename
   type: "pin",                // Renderer type — "pin" or "area"
@@ -146,7 +148,7 @@ export default myPin;
 An area renders as a filled polygon on the map.
 
 ```js
-// src/culturalMap/data/fishing-area-past-map.js
+// src/projects/<project>/data/map/fishing-area-past-map.js
 const fishingAreaPast = {
   id: "fishing-area-past",
   type: "area",
@@ -194,7 +196,7 @@ An area still needs `lat`/`lng`: that is the point the map flies to when the are
 
 The page header carries a bar that switches the map between periods. Choosing one shows only the matching items — on the map, in the manifest, and in the header counts.
 
-**The bar is built from the data.** `index.js` walks the whole tree, collects every distinct `period` value it finds, and makes a button for each, after an "All" button. Nothing is hardcoded to past and present.
+**The bar is built from the data.** `MapSection` walks the whole tree, collects every distinct `period` value it finds, and makes a button for each, after an "All" button. Nothing is hardcoded to past and present.
 
 Two ways to write the field:
 
@@ -218,7 +220,7 @@ Listing a period there fixes where it sits in the bar and lets it display a labe
 
 ### Add a new leaf pin
 
-1. Create `src/culturalMap/data/<id>-map.js`:
+1. Create `src/projects/<project>/data/map/<id>-map.js`:
 
 ```js
 const myLocation = {
@@ -235,26 +237,24 @@ const myLocation = {
 export default myLocation;
 ```
 
-2. Either import it into a parent's `children` array, or — for a top-level item — import it in `src/culturalMap/data/index.js` and add it to `ROOTS`:
+2. Either import it into a parent's `children` array, or — for a top-level item — import it in `src/projects/<project>/data/map/index.js` and add it to `roots`:
 
 ```js
 import myLocation from "./my-location-map.js";
 // ...
-const ROOTS = Object.freeze(
-  [
+  roots: [
     // ... existing items
     myLocation,
-  ].map(createMapObject)
-);
+  ],
 ```
 
 ### Add a new area
 
-Same steps, with `type: "area"` and a `coordinates` array. Place it among the other areas in `ROOTS`, in size order — largest first — so it does not cover a smaller area.
+Same steps, with `type: "area"` and a `coordinates` array. Place it among the other areas in `roots`, in size order — largest first — so it does not cover a smaller area.
 
 ### Add a new group (super-item)
 
-Create a data file with a `children` array holding imported child data objects (see "Hierarchy and navigation"). Give it `period: ""` if it spans more than one period. Then list the group in `ROOTS` in place of its children.
+Create a data file with a `children` array holding imported child data objects (see "Hierarchy and navigation"). Give it `period: ""` if it spans more than one period. Then list the group in `roots` in place of its children.
 
 ### Add a new period
 
@@ -262,7 +262,7 @@ Put `period: "<key>"` in a data file. A button appears on its own. Add a matchin
 
 ### Add a new category
 
-Edit `CATEGORIES` in `src/culturalMap/data/categories.js`:
+Edit `CATEGORIES` in `src/projects/<project>/data/map/categories.js`:
 
 ```js
 export const CATEGORIES = {
@@ -288,7 +288,7 @@ Move the import and the entry from the old parent's `children` array to the new 
 
 ### Remove an item
 
-1. Remove it from its parent's `children` array, or from `ROOTS` in `index.js`
+1. Remove it from its parent's `children` array, or from `roots` in `index.js`
 2. Remove the now-unused import
 3. Delete the `<id>-map.js` file
 4. If it was a super-item, decide where its children should go (re-parent or also delete)
@@ -332,9 +332,3 @@ const RENDERERS = {
 ```
 
 4. Use `type: "route"` in data files. No other component changes needed.
-
----
-
-## Known leftovers
-
-`heritage-core-map.js` and `waterfront-belt-map.js` are from an earlier data model: their `children` hold **ID strings**, and they carry no `period`. Nothing imports them, and `createMapObject` throws on a string child, so do not copy them as a template — use the group example above. They can be deleted once real parent nodes exist.

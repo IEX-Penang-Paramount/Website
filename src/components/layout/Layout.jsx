@@ -1,17 +1,18 @@
 import { useEffect, useRef } from "react";
 import { Outlet, useLocation } from "react-router-dom";
+import { ProjectContext } from "../../projects/ProjectContext.js";
 import TopBar from "./TopBar.jsx";
 import Footer from "./Footer.jsx";
 import "./Layout.css";
 
 /**
- * Shared page chrome. Every route renders inside this, so the top bar and
- * footer are defined once and are identical across the site.
+ * Page chrome for one project. Provides the project to every page inside it,
+ * and stamps `data-project` so a project's theme.css can restyle the lot.
  *
  * Also runs the site-wide scroll-reveal: any element tagged `data-reveal`
  * fades up as it nears the viewport. Re-scanned on every route change.
  */
-function Layout() {
+function Layout({ project }) {
   const { pathname } = useLocation();
   const mainRef = useRef(null);
 
@@ -66,13 +67,16 @@ function Layout() {
   }, [pathname]);
 
   return (
-    <div className="layout">
-      <TopBar />
-      <main ref={mainRef} key={pathname} className="layout__main site-main route-fade">
-        <Outlet />
-      </main>
-      <Footer />
-    </div>
+    <ProjectContext value={project}>
+      <title>{project.getName()}</title>
+      <div className="layout" data-project={project.getId()}>
+        <TopBar />
+        <main ref={mainRef} key={pathname} className="layout__main site-main route-fade">
+          <Outlet />
+        </main>
+        <Footer />
+      </div>
+    </ProjectContext>
   );
 }
 

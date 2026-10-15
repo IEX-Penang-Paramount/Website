@@ -1,51 +1,35 @@
-import { lazy, Suspense } from "react";
+import { Suspense, createElement } from "react";
 import { useParams, Link } from "react-router-dom";
-import { stories } from "./Assets/StoryData.js";
+import { useProject } from "../projects/ProjectContext.js";
 import "./ArticleDisplay.css";
-
-const images = import.meta.glob("./Assets/Images/*", { eager: true });
-const contentModules = import.meta.glob("./Assets/Content/*.jsx");
-
-function getArticleImage(articleID) {
-  for (const [path, mod] of Object.entries(images)) {
-    const filename = path.split("/").pop();
-    const name = filename.substring(0, filename.lastIndexOf("."));
-    if (name === articleID) {
-      return mod.default;
-    }
-  }
-  return null;
-}
-
-function getContentComponent(articleID) {
-  const key = `./Assets/Content/${articleID}.jsx`;
-  if (!contentModules[key]) return null;
-  return lazy(contentModules[key]);
-}
 
 function ArticleDisplay() {
   const { articleID } = useParams();
-  const article = stories.find((s) => s.articleID === articleID);
+  const project = useProject();
+  const stories = project.getSection("stories");
+  const article = stories.find(articleID);
+
+  const back = (
+    <Link className="article-back" to={project.pathTo(stories.getPath())}>
+      ← Back to Stories
+    </Link>
+  );
 
   if (!article) {
     return (
       <div className="article-page">
-        <Link className="article-back" to="/story">
-          ← Back to Stories
-        </Link>
+        {back}
         <div className="article-not-found">Article not found.</div>
       </div>
     );
   }
 
-  const heroImage = getArticleImage(articleID);
-  const Content = getContentComponent(articleID);
+  const heroImage = stories.getImage(articleID);
+  const content = stories.getContent(articleID);
 
   return (
     <div className="article-page">
-      <Link className="article-back" to="/story">
-        ← Back to Stories
-      </Link>
+      {back}
 
       {heroImage && (
         <img
@@ -64,10 +48,8 @@ function ArticleDisplay() {
       </header>
 
       <div className="article-body">
-        {Content ? (
-          <Suspense fallback={<p>Loading...</p>}>
-            <Content />
-          </Suspense>
+        {content ? (
+          <Suspense fallback={<p>Loading...</p>}>{createElement(content)}</Suspense>
         ) : (
           <p>No content available yet.</p>
         )}

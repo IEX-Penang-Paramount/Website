@@ -1,12 +1,7 @@
 import { useState, useMemo } from "react";
 import PageHeader from "../components/ui/PageHeader.jsx";
-import {
-  getRoots,
-  getFilterOptions,
-  matchesPeriod,
-  ALL_PERIODS,
-  CATEGORIES,
-} from "./data/index.js";
+import { matchesPeriod, ALL_PERIODS } from "./data/periods.js";
+import { useSection } from "../projects/ProjectContext.js";
 import MapView from "./MapView.jsx";
 import LocationPanel from "./LocationPanel.jsx";
 import BackButton from "./BackButton.jsx";
@@ -24,8 +19,10 @@ function CulturalMapMain() {
   const [selectedItem, setSelectedItem] = useState(null);
   const [period, setPeriod] = useState(ALL_PERIODS);
 
-  const roots = useMemo(() => getRoots(), []);
-  const filterOptions = useMemo(() => getFilterOptions(), []);
+  const map = useSection("map");
+  const roots = map.getItems();
+  const filterOptions = map.getFilterOptions();
+  const categories = Object.entries(map.getCategories());
 
   // Filtering the roots array preserves the deliberate areas-largest-first order.
   const visibleRoots = useMemo(
@@ -88,31 +85,35 @@ function CulturalMapMain() {
         eyebrow="The map room · 地图"
         title="Cultural Map"
         mark="岸"
-        lead="George Town's older places sit along this shore — clan jetties, temples, merchant houses. Paramount is a little way up the coast. They are grouped here by the stretch of water they belong to."
+        {...map.getHeader()}
         meta={[
           { k: "Sites", v: String(totalSites) },
-          { k: "Stretches of coast", v: String(visibleRoots.length) },
+          { k: map.getUi("groupNoun") ?? "Groups", v: String(visibleRoots.length) },
         ]}
       >
-        <PeriodFilter
-          options={filterOptions}
-          value={period}
-          onChange={handleSelectPeriod}
-        />
+        {filterOptions.length > 1 && (
+          <PeriodFilter
+            options={filterOptions}
+            value={period}
+            onChange={handleSelectPeriod}
+          />
+        )}
       </PageHeader>
 
-      <section className="section section--tight">
-        <div className="container">
-          <ul className="map-legend" data-reveal>
-            {Object.entries(CATEGORIES).map(([key, cat]) => (
-              <li key={key}>
-                <span className="map-legend__dot" style={{ background: cat.color }} />
-                {cat.label}
-              </li>
-            ))}
-          </ul>
-        </div>
-      </section>
+      {categories.length > 0 && (
+        <section className="section section--tight">
+          <div className="container">
+            <ul className="map-legend" data-reveal>
+              {categories.map(([key, cat]) => (
+                <li key={key}>
+                  <span className="map-legend__dot" style={{ background: cat.color }} />
+                  {cat.label}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </section>
+      )}
 
       <div className="map-layout">
         <section className="cultural-map-section">
@@ -121,6 +122,8 @@ function CulturalMapMain() {
             selectedItem={shownSelection}
             onSelectItem={handleSelectItem}
             navStack={navStack}
+            center={map.getCenter()}
+            zoom={map.getZoom()}
           />
           {navStack.length > 0 && <BackButton onClick={handleGoBack} />}
           {shownSelection && (
@@ -134,9 +137,9 @@ function CulturalMapMain() {
 
         <nav className="site-index" aria-label="Site index">
           <p className="site-index__caption" aria-live="polite">
-            {totalSites > 0
-              ? `Manifest — ${totalSites} sites`
-              : "Manifest — nothing recorded for this period"}
+            {map.isEmpty()
+              ? "Manifest — nothing recorded yet"
+              : `Manifest — ${totalSites} sites`}
           </p>
           {visibleRoots.map((group) => (
             <div className="site-index__group" key={group.getId()}>

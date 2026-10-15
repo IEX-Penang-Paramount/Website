@@ -4,16 +4,13 @@ import MapObjectComponent from "./MapObjectComponent.jsx";
 import "leaflet/dist/leaflet.css";
 import "./MapView.css";
 
-const CENTER = [5.414, 100.339];
-const DEFAULT_ZOOM = 15;
-
 // The Esri service only has tiles down to zoom 16, and Leaflet hides a tile
 // layer entirely above its maxZoom. Selecting an item flies to zoom 17, which
 // blanked the base map; maxNativeZoom keeps it drawn by scaling zoom-16 tiles.
 const TILE_MAX_NATIVE_ZOOM = 16;
 const TILE_MAX_ZOOM = 18;
 
-function FlyToHandler({ selectedItem, navStack }) {
+function FlyToHandler({ selectedItem, navStack, center, zoom }) {
   const map = useMap();
   const currentParent = navStack[navStack.length - 1] || null;
 
@@ -25,18 +22,18 @@ function FlyToHandler({ selectedItem, navStack }) {
         duration: 1.0,
       });
     } else {
-      map.flyTo(CENTER, DEFAULT_ZOOM, { duration: 1.0 });
+      map.flyTo(center, zoom, { duration: 1.0 });
     }
-  }, [selectedItem, currentParent, map]);
+  }, [selectedItem, currentParent, map, center, zoom]);
 
   return null;
 }
 
-function MapView({ items, selectedItem, onSelectItem, navStack }) {
+function MapView({ items, selectedItem, onSelectItem, navStack, center, zoom }) {
   return (
     <MapContainer
-      center={CENTER}
-      zoom={DEFAULT_ZOOM}
+      center={center}
+      zoom={zoom}
       className="cultural-map"
       zoomControl={false}
     >
@@ -63,7 +60,12 @@ function MapView({ items, selectedItem, onSelectItem, navStack }) {
         />
       ))}
 
-      <FlyToHandler selectedItem={selectedItem} navStack={navStack} />
+      <FlyToHandler
+        selectedItem={selectedItem}
+        navStack={navStack}
+        center={center}
+        zoom={zoom}
+      />
     </MapContainer>
   );
 }

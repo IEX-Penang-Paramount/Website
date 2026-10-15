@@ -1,61 +1,61 @@
-import root from "./_root-map.js";
-import heritageCore from "./heritage-core-map.js";
-import waterfrontBelt from "./waterfront-belt-map.js";
-import khooKongsi from "./khoo-kongsi-map.js";
-import armenianStreet from "./armenian-street-map.js";
-import kapitanKeling from "./kapitan-keling-map.js";
-import cheongFattTze from "./cheong-fatt-tze-map.js";
-import chewJetty from "./chew-jetty-map.js";
-import clanJettiesArea from "./clan-jetties-area-map.js";
+import { createMapObject } from "./MapObject.js";
+import { PERIODS, ALL_PERIODS, comparePeriods } from "./periods.js";
 
-export const CATEGORIES = {
-  "clan-house": { label: "Clan House", color: "#a94f30" },
-  mansion: { label: "Heritage Mansion", color: "#395a55" },
-  "street-art": { label: "Street Art & Culture", color: "#1c2926" },
-  waterfront: { label: "Waterfront & Jetties", color: "#8a6a41" },
-  religious: { label: "Temple & Mosque", color: "#6a5f7e" },
-};
+import fishHarvest from "./fish-harvest-map.js";
+import landReclamationEfforts from "./land-reclamation-efforts-map.js";
+import theCommunity from "./the-community-map.js";
 
-const ALL_PINS = [
-  root,
-  heritageCore,
-  waterfrontBelt,
-  khooKongsi,
-  armenianStreet,
-  kapitanKeling,
-  cheongFattTze,
-  chewJetty,
-  clanJettiesArea,
-];
+import firstPenangBridge from "./first-penang-bridge-map.js";
+import secondPenangBridge from "./second-penang-bridge-map.js";
+import northernStreetPresent from "./northern-street-present-map.js";
+import eoHotel from "./eo-hotel-map.js";
+import northernStreetPast from "./northern-street-past-map.js";
+import fishMarketsAndRestaurants from "./fish-markets-and-restaurants-map.js";
+import bungalowHouses from "./bungalow-houses-map.js";
 
-const PIN_REGISTRY = new Map(ALL_PINS.map((p) => [p.id, p]));
+export { CATEGORIES } from "./categories.js";
+export { ALL_PERIODS, matchesPeriod } from "./periods.js";
 
-export function getPin(id) {
-  return PIN_REGISTRY.get(id);
+// Top-level map objects only; each one builds its own children.
+// Areas before pins, largest area first: later areas are drawn on top, so
+// smaller overlapping areas stay clickable.
+const ROOTS = Object.freeze(
+  [
+    fishHarvest,
+    landReclamationEfforts,
+    theCommunity,
+    firstPenangBridge,
+    secondPenangBridge,
+    northernStreetPresent,
+    eoHotel,
+    northernStreetPast,
+    fishMarketsAndRestaurants,
+    bungalowHouses,
+  ].map(createMapObject)
+);
+
+export function getRoots() {
+  return ROOTS;
 }
 
-export function getChildren(pin) {
-  return (pin.children || []).map((id) => PIN_REGISTRY.get(id));
+function collectPeriods(items, found = new Set()) {
+  items.forEach((item) => {
+    if (item.getPeriod()) found.add(item.getPeriod());
+    collectPeriods(item.getChildren(), found);
+  });
+  return found;
 }
 
-export function getRootPins() {
-  return getChildren(PIN_REGISTRY.get("_root"));
-}
+// Every period present in the data, never a hardcoded pair. Computed once:
+// the tree is frozen and cannot change at runtime. The buttons uppercase their
+// text, so a period with no entry in PERIODS reads fine under its own key.
+const FILTER_OPTIONS = Object.freeze([
+  Object.freeze({ key: ALL_PERIODS, label: "All" }),
+  ...[...collectPeriods(ROOTS)]
+    .sort(comparePeriods)
+    .map((key) => Object.freeze({ key, label: PERIODS[key]?.label ?? key })),
+]);
 
-export function isSuperPin(pin) {
-  return Array.isArray(pin.children) && pin.children.length > 0;
-}
-
-export function isArea(pin) {
-  return pin.type === "area";
-}
-
-export const DEFAULT_PIN_COLOR = "#3b82f6";
-export const DEFAULT_AREA_COLOR = "#3b82f6";
-
-export function getPinColor(pin) {
-  const fallback = isArea(pin) ? DEFAULT_AREA_COLOR : DEFAULT_PIN_COLOR;
-  if (pin.color) return pin.color;
-  if (pin.category && CATEGORIES[pin.category]) return CATEGORIES[pin.category].color;
-  return fallback;
+export function getFilterOptions() {
+  return FILTER_OPTIONS;
 }

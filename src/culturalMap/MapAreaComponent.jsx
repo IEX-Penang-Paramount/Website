@@ -1,6 +1,5 @@
 import { Polygon, Tooltip } from "react-leaflet";
-import { getPinColor } from "./data/index.js";
-import "./MapArea.css";
+import "./MapAreaComponent.css";
 
 const AREA_FILL_OPACITY = 0.15;
 const AREA_FILL_OPACITY_ACTIVE = 0.35;
@@ -9,8 +8,8 @@ const AREA_STROKE_WEIGHT_ACTIVE = 3;
 
 const AREA_STROKE_WEIGHT_SUPER = 4;
 
-function MapArea({ location, isLeaf = true, isSelected, onSelect }) {
-  const color = getPinColor(location);
+function MapAreaComponent({ location, isLeaf = true, isSelected, onSelect }) {
+  const color = location.getColor();
   const weight = isSelected
     ? AREA_STROKE_WEIGHT_ACTIVE
     : isLeaf
@@ -19,7 +18,7 @@ function MapArea({ location, isLeaf = true, isSelected, onSelect }) {
 
   return (
     <Polygon
-      positions={location.coordinates}
+      positions={location.getCoordinates()}
       pathOptions={{
         color,
         weight,
@@ -30,10 +29,10 @@ function MapArea({ location, isLeaf = true, isSelected, onSelect }) {
       eventHandlers={{ click: () => onSelect(location) }}
     >
       <Tooltip direction="center" permanent>
-        {location.name}
+        {location.getName()}
       </Tooltip>
     </Polygon>
   );
 }
 
-export default MapArea;
+export default MapAreaComponent;

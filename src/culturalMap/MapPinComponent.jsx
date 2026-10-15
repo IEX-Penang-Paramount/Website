@@ -1,12 +1,11 @@
 import { useMemo } from "react";
 import { Marker, Tooltip } from "react-leaflet";
 import L from "leaflet";
-import { getPinColor } from "./data/index.js";
-import "./MapPin.css";
+import "./MapPinComponent.css";
 
-function MapPin({ location, index, isSelected, onSelect, isLeaf = true }) {
+function MapPinComponent({ location, index, isSelected, onSelect, isLeaf = true }) {
   const icon = useMemo(() => {
-    const color = getPinColor(location);
+    const color = location.getColor();
     const sizeClass = isLeaf ? "" : "map-pin--super";
     const activeClass = isSelected ? "map-pin--active" : "";
     const size = isLeaf ? [20, 20] : [36, 36];
@@ -25,21 +24,21 @@ function MapPin({ location, index, isSelected, onSelect, isLeaf = true }) {
 
   return (
     <Marker
-      position={[location.lat, location.lng]}
+      position={[location.getLat(), location.getLng()]}
       icon={icon}
       eventHandlers={{ click: () => onSelect(location) }}
     >
       {isLeaf ? (
         <Tooltip direction="top" offset={[0, -12]}>
-          {location.name}
+          {location.getName()}
         </Tooltip>
       ) : (
         <Tooltip direction="bottom" offset={[0, 14]} permanent>
-          {location.name}
+          {location.getName()}
         </Tooltip>
       )}
     </Marker>
   );
 }
 
-export default MapPin;
+export default MapPinComponent;

@@ -1,33 +1,38 @@
-import { NavLink } from "react-router-dom";
-import { NAV_ITEMS } from "../../config/navigation.js";
-import { SITE } from "../../config/site.js";
+import { Link, NavLink } from "react-router-dom";
+import { ALL_PROJECTS } from "../../projects/Project.js";
+import { useProject } from "../../projects/ProjectContext.js";
 import "./TopBar.css";
 
-/**
- * Fixed navigation bar. Stays put while the page scrolls beneath it.
- * Tabs are generated from NAV_ITEMS, so this file never names a route.
- */
+const tabClass = ({ isActive }) =>
+  isActive ? "topbar__tab topbar__tab--active" : "topbar__tab";
+
+/** Fixed navigation bar. Its tabs are the current project's sections. */
 function TopBar() {
+  const project = useProject();
+
   return (
     <header className="topbar">
       <div className="topbar__inner">
-        <NavLink className="topbar__brand" to="/">
-          {SITE.name}
-        </NavLink>
+        <Link className="topbar__brand" to={project.getBasePath()}>
+          {project.getName()}
+        </Link>
 
         <nav className="topbar__nav" aria-label="Primary">
-          {NAV_ITEMS.map((item) => (
+          <NavLink to={project.getBasePath()} end className={tabClass}>
+            Home
+          </NavLink>
+          {project.getSections().map((section) => (
             <NavLink
-              key={item.path}
-              to={item.path}
-              end={item.end}
-              className={({ isActive }) =>
-                isActive ? "topbar__tab topbar__tab--active" : "topbar__tab"
-              }
+              key={section.getKey()}
+              to={project.pathTo(section.getPath())}
+              className={tabClass}
             >
-              {item.label}
+              {section.getLabel()}
             </NavLink>
           ))}
+          <Link className="topbar__tab" to={ALL_PROJECTS}>
+            All projects
+          </Link>
         </nav>
       </div>
     </header>

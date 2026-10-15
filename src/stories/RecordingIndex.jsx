@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
-import { stories } from "./Assets/StoryData.js";
+import EmptyState from "../components/ui/EmptyState.jsx";
+import { useProject } from "../projects/ProjectContext.js";
 import "./RecordingIndex.css";
 
 const pad = (n) => String(n).padStart(2, "0");
@@ -33,15 +34,19 @@ function Waveform({ seed, bars = 32 }) {
 
 /** The full run of recordings, numbered like a field log. */
 function RecordingIndex() {
-  if (stories.length === 0) {
-    return <p className="rec-empty">No recordings transcribed yet.</p>;
+  const project = useProject();
+  const stories = project.getSection("stories");
+  const pathTo = (story) => project.pathTo(stories.getPath(), story.articleID);
+
+  if (stories.isEmpty()) {
+    return <EmptyState message="No recordings transcribed yet." />;
   }
 
-  const [lead, ...rest] = stories;
+  const [lead, ...rest] = stories.getItems();
 
   return (
     <div className="rec-index">
-      <Link className="rec-lead" to={`/story/${lead.articleID}`} data-reveal>
+      <Link className="rec-lead" to={pathTo(lead)} data-reveal>
         <div className="rec-lead__head">
           <span className="rec-lead__no">REC {pad(1)}</span>
           <Waveform seed={lead.articleID} bars={48} />
@@ -56,7 +61,7 @@ function RecordingIndex() {
       <ol className="rec-list">
         {rest.map((s, i) => (
           <li key={s.articleID} data-reveal style={{ "--reveal-delay": `${i * 0.05}s` }}>
-            <Link className="rec-row" to={`/story/${s.articleID}`}>
+            <Link className="rec-row" to={pathTo(s)}>
               <span className="rec-row__no">REC {pad(i + 2)}</span>
               <Waveform seed={s.articleID} bars={24} />
               <span className="rec-row__quote">{s.abstractQuote || s.title}</span>

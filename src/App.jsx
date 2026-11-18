@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
+import { ALL_PROJECTS } from "./projects/Project.js";
 import "./App.css";
 
 /* ==========================================================================
@@ -67,9 +68,7 @@ const LINE = {
 };
 
 const GATEWAY = [
-  { to: "/cultural-map", k: "Where it sits", t: "Cultural Map", d: "The shore against the coastline it belongs to." },
-  { to: "/glossary", k: "How they read it", t: "Glossary", d: "Local terms for tide, weather and luck." },
-  { to: "/story", k: "In their words", t: "Stories", d: "Recorded accounts, kept close to the telling." },
+  { to: ALL_PROJECTS, k: "The projects", t: "Choose a project", d: "Each has its own map, glossary and recorded accounts." },
 ];
 
 const DOTS = ["The shore", "The horizon", "The recording", "Another kind of heritage", "The record"];
@@ -703,7 +702,7 @@ function App() {
           <h2 className="pm-record-h">
             这份记录还在做。
             <span className="pm-en">
-              The record is still being made. The map, the glossary and the accounts are below.
+              The record is still being made. The projects are below.
             </span>
           </h2>
           <div className="pm-gateway">

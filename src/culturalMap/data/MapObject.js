@@ -1,9 +1,8 @@
-import { CATEGORIES } from "./categories.js";
-
 /**
  * Read-only view of one map object's data (a *-map.js file). A parent's
  * `children` holds its children's data objects (import their *-map.js files),
  * and the constructor builds them, so every object carries its own subtree.
+ * `context.categories` is the owning map's category table.
  */
 export class MapObject {
   #id;
@@ -19,7 +18,7 @@ export class MapObject {
   #address;
   #children;
 
-  constructor(json) {
+  constructor(json, context = {}) {
     this.#id = json.id;
     this.#type = json.type;
     this.#period = json.period;
@@ -27,11 +26,13 @@ export class MapObject {
     this.#nameZh = json.nameZh;
     this.#lat = json.lat;
     this.#lng = json.lng;
-    this.#color = json.color;
-    this.#category = json.category;
+    this.#category = context.categories?.[json.category];
+    this.#color = json.color || this.#category?.color;
     this.#shortDescription = json.shortDescription;
     this.#address = json.address;
-    this.#children = Object.freeze((json.children || []).map(createMapObject));
+    this.#children = Object.freeze(
+      (json.children || []).map((child) => createMapObject(child, context))
+    );
   }
 
   getId() {
@@ -62,8 +63,8 @@ export class MapObject {
     return this.#lng;
   }
 
-  getCategory() {
-    return this.#category;
+  getCategoryLabel() {
+    return this.#category?.label;
   }
 
   getShortDescription() {
@@ -83,11 +84,7 @@ export class MapObject {
   }
 
   getColor() {
-    return (
-      this.#color ||
-      CATEGORIES[this.#category]?.color ||
-      this.constructor.DEFAULT_COLOR
-    );
+    return this.#color || this.constructor.DEFAULT_COLOR;
   }
 }
 
@@ -100,8 +97,8 @@ export class MapArea extends MapObject {
 
   #coordinates;
 
-  constructor(json) {
-    super(json);
+  constructor(json, context) {
+    super(json, context);
     this.#coordinates = Object.freeze(
       json.coordinates.map((point) => Object.freeze([...point]))
     );
@@ -117,10 +114,10 @@ const CLASSES_BY_TYPE = {
   area: MapArea,
 };
 
-export function createMapObject(json) {
+export function createMapObject(json, context) {
   const MapObjectClass = CLASSES_BY_TYPE[json?.type];
   if (!MapObjectClass) {
     throw new Error(`Map object "${json?.id ?? json}" has unknown type "${json?.type}"`);
   }
-  return new MapObjectClass(json);
+  return new MapObjectClass(json, context);
 }

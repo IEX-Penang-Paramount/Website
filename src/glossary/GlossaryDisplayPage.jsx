@@ -1,23 +1,20 @@
-import React from "react";
+import { Link, useParams } from "react-router-dom";
 import { GlossaryItem } from "./GlossaryItem";
-import { Link } from "react-router-dom";
-import "./GlossaryDisplayPage.css"
-import { useParams } from "react-router-dom";
-import { glossaryData } from "./glossaryData";
+import { useProject } from "../projects/ProjectContext.js";
+import "./GlossaryDisplayPage.css";
+
 export default function GlossaryDisplayPage() {
+  const { id } = useParams();
+  const project = useProject();
+  const glossary = project.getSection("glossary");
+  const word = glossary.find(id);
 
-    const {id} = useParams();
-    const word = glossaryData.find(w => w.id === id);
-    if (!word) {
-        return <div className="wordFrame">Word not found</div>;
-    }
-    return (
+  return (
     <div className="outerWordFrame">
-        <div className = "returnLink">
-            <Link to="/glossary">{"< Back to Glossary"}</Link>
-        </div>
-        <GlossaryItem word={word}/>
-     </div>
-    )
+      <div className="returnLink">
+        <Link to={project.pathTo(glossary.getPath())}>{"< Back to Glossary"}</Link>
+      </div>
+      {word ? <GlossaryItem word={word} /> : <div className="wordFrame">Word not found</div>}
+    </div>
+  );
 }
-

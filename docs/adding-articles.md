@@ -1,6 +1,6 @@
 # Adding New Articles to the Stories Section
 
-This guide walks you through adding a new article to the IEX Website stories section.
+This guide walks you through adding a new article to a project's stories section. `<project>` below is the project's folder under `src/projects/` (e.g. `paramount`, `sungai-batu`).
 
 ## Overview
 
@@ -8,9 +8,9 @@ Each article consists of up to three parts:
 
 | Part | Location | Required? |
 |------|----------|-----------|
-| Metadata entry | `src/stories/Assets/StoryData.js` | Yes |
-| Content component | `src/stories/Assets/Content/{articleID}.jsx` | Yes |
-| Hero image | `src/stories/Assets/Images/{articleID}.jpg` | No |
+| Metadata entry | `src/projects/<project>/data/stories/StoryData.js` | Yes |
+| Content component | `src/projects/<project>/data/stories/Content/{articleID}.jsx` | Yes |
+| Hero image | `src/projects/<project>/data/stories/Images/{articleID}.jpg` | No |
 
 No routing or configuration changes are needed — everything is wired up automatically.
 
@@ -18,7 +18,7 @@ No routing or configuration changes are needed — everything is wired up automa
 
 ## Step 1 — Register the article metadata
 
-Open `src/stories/Assets/StoryData.js` and add a new object to the `stories` array:
+Open `src/projects/<project>/data/stories/StoryData.js` and add a new object to the `stories` array:
 
 ```js
 {
@@ -35,7 +35,7 @@ Open `src/stories/Assets/StoryData.js` and add a new object to the `stories` arr
 
 | Field | Type | Required | Description |
 |-------|------|----------|-------------|
-| `articleID` | string | Yes | Unique identifier. Used in the URL (`/story/A4`), to match hero images, and to load the content component. |
+| `articleID` | string | Yes | Unique identifier. Used in the URL (`/<project>/story/A4`), to match hero images, and to load the content component. |
 | `title` | string | Yes | Article title displayed on the article page and on feature cards. |
 | `abstract` | string | No | Short summary of the article. |
 | `abstractQuote` | string | No | Quote shown on the featured card. Falls back to `title` if omitted. |
@@ -51,10 +51,10 @@ Open `src/stories/Assets/StoryData.js` and add a new object to the `stories` arr
 Create a new file at:
 
 ```
-src/stories/Assets/Content/{articleID}.jsx
+src/projects/<project>/data/stories/Content/{articleID}.jsx
 ```
 
-For example, `src/stories/Assets/Content/A4.jsx`:
+For example, `src/projects/<project>/data/stories/Content/A4.jsx`:
 
 ```jsx
 export default function A4() {
@@ -90,7 +90,7 @@ export default function A4() {
 
 To include images within the article body:
 
-1. Place the image file in `src/stories/Assets/Images/` using the naming pattern `{articleID}-{label}.{ext}` (e.g., `A4-01.png`).
+1. Place the image file in `src/projects/<project>/data/stories/Images/` using the naming pattern `{articleID}-{label}.{ext}` (e.g., `A4-01.png`).
 2. Import and use it in your content component:
 3. If you are unsure how to do it, feed this tutorial to AI and ask the tool to deal with it for you. :)
 
@@ -119,10 +119,10 @@ export default function A4() {
 To display a large banner image at the top of the article page, place an image file in:
 
 ```
-src/stories/Assets/Images/{articleID}.{ext}
+src/projects/<project>/data/stories/Images/{articleID}.{ext}
 ```
 
-For example: `src/stories/Assets/Images/A4.jpg`
+For example: `src/projects/<project>/data/stories/Images/A4.jpg`
 
 - The filename (without extension) **must** exactly match the `articleID`.
 - Supported formats: `.jpg`, `.png`, `.webp`, or any web-compatible image format.
@@ -135,8 +135,8 @@ For example: `src/stories/Assets/Images/A4.jpg`
 
 After completing the steps above, your new article will:
 
-- Appear in the **feature board** on the main stories page (randomly selected alongside other articles).
-- Be accessible at the URL `/story/{articleID}` (e.g., `/story/A4`).
+- Appear in the recording index on the project's stories page, in the order listed in `StoryData.js`.
+- Be accessible at the URL `/<project>/story/{articleID}` (e.g., `/<project>/story/A4`).
 - Display with its hero image, title, author, date, and full content.
 
 No changes to routing, configuration, or other components are necessary.
@@ -146,27 +146,20 @@ No changes to routing, configuration, or other components are necessary.
 ## File structure reference
 
 ```
-src/stories/
-├── Assets/
-│   ├── StoryData.js              ← article metadata (Step 1)
-│   ├── Content/
-│   │   ├── A1.jsx
-│   │   ├── A2.jsx
-│   │   ├── A3.jsx
-│   │   └── A4.jsx                ← new content component (Step 2)
-│   └── Images/
-│       ├── A1.jpg
-│       ├── A1-01.png
-│       └── A4.jpg                ← new hero image (Step 3)
-├── StoriesMain.jsx               (main stories page)
-├── ArticleDisplay.jsx            (individual article renderer)
-├── FeatureBoard.jsx              (featured article cards)
-└── SearchList.jsx                (placeholder)
+src/projects/<project>/data/stories/
+├── index.js                      (collects the files below — no edits needed)
+├── StoryData.js                  ← article metadata (Step 1)
+├── Content/
+│   └── A4.jsx                    ← new content component (Step 2)
+└── Images/
+    └── A4.jpg                    ← new hero image (Step 3)
+
+src/stories/                      (shared page components — no edits needed)
 ```
 
 ## Quick checklist
 
 - [ ] Added metadata entry to `StoryData.js` with a unique `articleID`
-- [ ] Created `src/stories/Assets/Content/{articleID}.jsx` with a default export
-- [ ] (Optional) Added hero image as `src/stories/Assets/Images/{articleID}.{ext}`
-- [ ] Verified the article loads at `/story/{articleID}` in the browser
+- [ ] Created `src/projects/<project>/data/stories/Content/{articleID}.jsx` with a default export
+- [ ] (Optional) Added hero image as `src/projects/<project>/data/stories/Images/{articleID}.{ext}`
+- [ ] Verified the article loads at `/<project>/story/{articleID}` in the browser

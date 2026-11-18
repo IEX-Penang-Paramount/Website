@@ -12,6 +12,12 @@
   transition: border-color var(--transition);
 }
 
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+  gap: var(--space-5);
+}
+
 .card:hover {
   border-color: var(--color-navy);
 }

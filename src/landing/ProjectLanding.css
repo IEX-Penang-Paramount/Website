@@ -1,0 +1,13 @@
+.project-front .page-header { min-height: min(680px, 78svh); display: flex; align-items: end; padding-bottom: clamp(3rem, 6vw, 6rem); }
+.project-front .page-header__lede { max-width: 55rem; }
+.project-front .page-header__lead { max-width: 42rem; color: inherit; font-size: clamp(1.15rem, 2vw, 1.55rem); }
+.project-front .page-header__mark { display: none; }
+.project-front--sungai-batu .page-header { color: #fff; background: radial-gradient(ellipse at 80% 10%, #54828a, transparent 48%), linear-gradient(135deg, #123c50, #31717b); }
+.project-front--sungai-batu .page-header__title, .project-front--sungai-batu .page-header__eyebrow { color: #fff; }
+.project-front .card-grid { gap: 1rem; }
+.project-front .card { min-height: 240px; padding: clamp(1.5rem, 3vw, 2.8rem); border: 1px solid rgba(132, 166, 159, .16); background: linear-gradient(145deg, rgba(255,255,255,.8), rgba(221,237,230,.52)); }
+.project-front .card__body { max-width: 33ch; }
+@media (max-width: 720px) {
+  .project-front .page-header { min-height: 65svh; }
+  .project-front--paramount .page-header { background-position: 64% center; }
+}

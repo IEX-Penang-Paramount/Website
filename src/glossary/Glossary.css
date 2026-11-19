@@ -114,26 +114,19 @@
   text-align: left;
   cursor: pointer;
 
-  background:
-    /* faint ruled-paper lines */
-    repeating-linear-gradient(
-      to bottom,
-      transparent 0,
-      transparent 27px,
-      rgba(27, 45, 48, 0.05) 27px,
-      rgba(27, 45, 48, 0.05) 28px
-    ),
-    var(--color-surface);
-  border: 1px solid var(--color-rule);
-  border-radius: var(--radius);
-  transition: border-color var(--transition), transform var(--transition);
+  background: linear-gradient(150deg, rgba(255, 255, 255, .82), rgba(218, 235, 228, .5));
+  border: 1px solid rgba(115, 148, 143, .15);
+  border-radius: 22px;
+  box-shadow: 0 12px 30px rgba(28, 67, 67, .045);
+  transition: box-shadow var(--transition), transform var(--transition);
 }
 
-.specimen:hover { border-color: var(--cat); transform: translateY(-2px); }
+.specimen:hover { box-shadow: 0 18px 36px rgba(28, 67, 67, .12); transform: translateY(-3px); }
 .specimen:focus-visible { outline: 2px solid var(--color-terracotta); outline-offset: 2px; }
 
 /* a punched hole, like a tag or a catalogue card */
 .specimen__punch {
+  display: none;
   position: absolute;
   top: var(--space-4);
   right: var(--space-4);
@@ -214,11 +207,11 @@
   margin-top: auto;
   padding-top: var(--space-2);
   font-family: var(--font-mono);
-  font-size: 0.62rem;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--color-ink-muted);
-  opacity: 0.5;
+  font-size: 0.78rem;
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--color-teal);
+  opacity: 1;
   transition: opacity var(--transition), color var(--transition);
 }
 

@@ -12,24 +12,24 @@
 
 :root {
   /* ---------- Colour ---------- */
-  --color-sand: #eae7e0;          /* page background — archival paper */
-  --color-surface: #f4f1e9;       /* cards, panels — a touch lighter */
-  --color-sand-alt: #e0dccf;      /* alternating band, insets */
+  --color-sand: #f5f1e8;
+  --color-surface: #fcfaf5;
+  --color-sand-alt: #e8eee8;
 
-  --color-navy: #1c2926;          /* top bar, footer, dark panels — wet teal-black */
-  --color-navy-deep: #12201d;     /* borders and hovers on dark */
-  --color-teal: #395a55;          /* secondary maritime accent */
+  --color-navy: #244854;
+  --color-navy-deep: #193a46;
+  --color-teal: #648b8d;
 
-  --color-terracotta: #a94f30;    /* primary action, active tab — burnt sienna */
-  --color-terracotta-dk: #883d1f; /* sienna on light, and hover */
+  --color-terracotta: #b9795e;
+  --color-terracotta-dk: #8e5945;
 
-  --color-ink: #23221c;           /* body text — warm near-black */
-  --color-ink-muted: #5d594e;     /* secondary text — warm grey */
-  --color-rule: #d0c9b9;          /* borders, dividers — warm hairline */
+  --color-ink: #273d40;
+  --color-ink-muted: #64716d;
+  --color-rule: #cdd6cd;
 
-  --color-on-dark: #ece6d7;       /* text on the teal-black */
-  --color-on-dark-muted: #97998a; /* secondary text on the teal-black */
-  --color-on-accent: #fbf6ec;     /* text on sienna */
+  --color-on-dark: #f6f2e9;
+  --color-on-dark-muted: #c7d6d1;
+  --color-on-accent: #fffaf2;
 
   /* ---------- Spacing scale ---------- */
   --space-1: 4px;
@@ -42,11 +42,11 @@
   --space-8: 64px;
 
   /* ---------- Typography ---------- */
-  --font-sans: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-  --font-display: "Big Shoulders Display", "Noto Sans SC", "Arial Narrow", "Helvetica Neue", sans-serif;
-  --font-mono: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
+  --font-sans: Arial, Helvetica, "Noto Sans SC", sans-serif;
+  --font-display: Arial, Helvetica, "Noto Sans SC", sans-serif;
+  --font-mono: Arial, Helvetica, "Noto Sans SC", sans-serif;
   --font-cjk: "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif;
-  --font-brush: "Ma Shan Zheng", "Noto Sans SC", cursive;
+  --font-brush: Arial, Helvetica, "Noto Sans SC", sans-serif;
 
   --text-sm: 14px;
   --text-base: 16px;

@@ -3,9 +3,10 @@
 .page-header {
   position: relative;
   overflow: hidden;
-  padding: clamp(3.5rem, 9vw, 7rem) 0 var(--space-7);
-  background: var(--color-sand-alt);
-  border-bottom: 1px solid var(--color-rule);
+  padding: clamp(5rem, 11vw, 9rem) 0 clamp(3rem, 6vw, 5rem);
+  background: linear-gradient(110deg, #143c4d 0%, #376b77 65%, #7d9fa1 100%);
+  color: #f7fbf8;
+  border-bottom: 1px solid rgba(255, 255, 255, .25);
 }
 
 /* The brush glyph, stamped large and low-contrast into the top-right. */
@@ -18,7 +19,7 @@
   font-size: clamp(9rem, 24vw, 20rem);
   line-height: 0.8;
   color: var(--color-terracotta);
-  opacity: 0.14;
+  opacity: 0.06;
   pointer-events: none;
   user-select: none;
 }
@@ -39,22 +40,22 @@
 .page-header__eyebrow {
   margin: 0 0 var(--space-4);
   font-family: var(--font-mono);
-  font-size: 0.72rem;
+  font-size: 0.86rem;
   font-weight: 500;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--color-terracotta-dk);
+  letter-spacing: 0.01em;
+  text-transform: none;
+  color: rgba(247, 251, 248, .8);
 }
 
 .page-header__title {
   margin: 0;
   font-family: var(--font-display);
-  font-size: var(--text-3xl);
-  font-weight: 800;
-  text-transform: uppercase;
-  letter-spacing: 0.01em;
-  line-height: 0.96;
-  color: var(--color-navy);
+  font-size: clamp(3.4rem, 7.5vw, 7rem);
+  font-weight: 500;
+  text-transform: none;
+  letter-spacing: -0.055em;
+  line-height: 0.98;
+  color: #fff;
 }
 
 .page-header__subtitle {
@@ -62,15 +63,15 @@
   margin: var(--space-4) 0 0;
   font-size: var(--text-lg);
   line-height: var(--leading-normal);
-  color: var(--color-ink-muted);
+  color: rgba(247, 251, 248, .78);
 }
 
 .page-header__lead {
   max-width: var(--measure);
   margin: var(--space-5) 0 0;
-  font-size: var(--text-xl);
+  font-size: clamp(1.15rem, 2vw, 1.45rem);
   line-height: 1.4;
-  color: var(--color-ink);
+  color: #f7fbf8;
 }
 
 .page-header__meta {
@@ -79,15 +80,15 @@
   gap: var(--space-6);
   margin: var(--space-6) 0 0;
   padding-top: var(--space-4);
-  border-top: 1px solid var(--color-rule);
+  border-top: 1px solid rgba(255, 255, 255, .32);
 }
 
 .page-header__meta dt {
   font-family: var(--font-mono);
-  font-size: 0.64rem;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--color-ink-muted);
+  font-size: 0.8rem;
+  letter-spacing: 0;
+  text-transform: none;
+  color: rgba(247, 251, 248, .72);
 }
 
 .page-header__meta dd {
@@ -95,7 +96,7 @@
   font-family: var(--font-display);
   font-size: var(--text-xl);
   font-weight: 700;
-  color: var(--color-navy);
+  color: #fff;
   font-variant-numeric: tabular-nums;
 }
 

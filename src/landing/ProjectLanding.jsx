@@ -1,13 +1,14 @@
 import PageHeader from "../components/ui/PageHeader.jsx";
 import Card from "../components/ui/Card.jsx";
 import { useProject } from "../projects/ProjectContext.js";
+import "./ProjectLanding.css";
 
 /** The default project front page: what it is, and a card into each section. */
 function ProjectLanding() {
   const project = useProject();
 
   return (
-    <>
+    <div className={`project-front project-front--${project.getId()}`}>
       <PageHeader
         eyebrow={project.getKicker()}
         title={project.getName()}
@@ -27,7 +28,7 @@ function ProjectLanding() {
           ))}
         </div>
       </section>
-    </>
+    </div>
   );
 }
 

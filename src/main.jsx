@@ -8,11 +8,10 @@ import "./index.css";
 import "./styles/layout.css";
 
 import { PROJECTS } from "./projects/index.js";
-import { ALL_PROJECTS } from "./projects/Project.js";
 import Layout from "./components/layout/Layout.jsx";
 import LegacyRedirect from "./components/routing/LegacyRedirect.jsx";
 import App from "./App.jsx";
-import ProjectsPage from "./landing/ProjectsPage.jsx";
+import MasterLanding from "./landing/MasterLanding.jsx";
 import ProjectLanding from "./landing/ProjectLanding.jsx";
 import GlossaryMain from "./glossary/GlossaryMain.jsx";
 import GlossaryDisplayPage from "./glossary/GlossaryDisplayPage.jsx";
@@ -43,9 +42,10 @@ createRoot(document.getElementById("root")).render(
   <StrictMode>
     <BrowserRouter basename="/Website">
       <Routes>
-        {/* The main landing is a full-bleed immersive scene with its own chrome. */}
-        <Route path="/" element={<App />} />
-        <Route path={ALL_PROJECTS} element={<ProjectsPage />} />
+        <Route path="/" element={<MasterLanding />} />
+        {/* Paramount keeps its immersive opening outside the shared page chrome. */}
+        <Route path="/paramount" element={<App />} />
+        <Route path="/projects" element={<Navigate to="/" replace />} />
 
         {PROJECTS.map((project) => (
           <Route
@@ -53,7 +53,7 @@ createRoot(document.getElementById("root")).render(
             path={project.getBasePath()}
             element={<Layout project={project} />}
           >
-            {PAGES.map(({ key, index, path, Page }) => {
+            {PAGES.filter(({ key }) => !(project.getId() === "paramount" && key === "landing")).map(({ key, index, path, Page }) => {
               const Element = project.getPage(key) ?? Page;
               return <Route key={key} index={index} path={path} element={<Element />} />;
             })}

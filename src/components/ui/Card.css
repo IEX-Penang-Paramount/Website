@@ -5,9 +5,10 @@
   flex-direction: column;
   padding: var(--space-5);
 
-  background: var(--color-surface);
-  border: 1px solid var(--color-rule);
-  border-radius: var(--radius);
+  background: linear-gradient(145deg, rgba(255, 255, 255, .78), rgba(220, 235, 230, .52));
+  border: 1px solid rgba(132, 166, 159, .18);
+  border-radius: 22px;
+  backdrop-filter: blur(5px);
 
   transition: border-color var(--transition);
 }
@@ -25,10 +26,10 @@
 .card__title {
   margin: 0 0 var(--space-3);
   font-family: var(--font-display);
-  font-size: var(--text-xl);
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.01em;
+  font-size: clamp(1.8rem, 2.4vw, 2.7rem);
+  font-weight: 500;
+  text-transform: none;
+  letter-spacing: -0.035em;
   color: var(--color-navy);
 }
 
@@ -44,10 +45,10 @@
   margin-top: auto;
 
   font-family: var(--font-mono);
-  font-size: 0.72rem;
+  font-size: 0.86rem;
   font-weight: 500;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
+  letter-spacing: 0;
+  text-transform: none;
   color: var(--color-terracotta-dk);
 }
 
@@ -59,3 +60,6 @@
   outline: 2px solid var(--color-terracotta);
   outline-offset: 3px;
 }
+
+/* Softer endings for section choices. */
+.card { border-radius: 22px; box-shadow: 0 12px 32px rgba(20, 55, 61, .045); }

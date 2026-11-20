@@ -68,7 +68,9 @@ const LINE = {
 };
 
 const GATEWAY = [
-  { to: ALL_PROJECTS, k: "The projects", t: "Choose a project", d: "Each has its own map, glossary and recorded accounts." },
+  { to: "/paramount/cultural-map", k: "Where it sits", t: "Cultural Map", d: "The shore against the coastline it belongs to." },
+  { to: "/paramount/glossary", k: "How they read it", t: "Glossary", d: "Local terms for tide, weather and luck." },
+  { to: "/paramount/story", k: "In their words", t: "Stories", d: "Recorded accounts, kept close to the telling." },
 ];
 
 const DOTS = ["The shore", "The horizon", "The recording", "Another kind of heritage", "The record"];
@@ -105,7 +107,6 @@ function App() {
   const cur = useRef(0);
   const playing = useRef(false);
   const recPlayed = useRef(false);
-  const suppressSnapRef = useRef(0);
 
   const [active, setActive] = useState(0);
 
@@ -171,7 +172,6 @@ function App() {
       heritageRef.current?.offsetTop || a1,
       recordRef.current?.offsetTop || a1,
     ];
-    suppressSnapRef.current = Date.now() + 800;
     deck.scrollTo({ top: targets[n], behavior: "smooth" });
   }, []);
 
@@ -428,55 +428,31 @@ function App() {
       }
     };
 
-    /* ---------- PPT-style snap on the two slide transitions ----------
-       Act 1 (slides 1–3) stays a free continuous scroll. The moment you reach
-       its tail, the step to "another kind of heritage" and then to "the record"
-       snaps to a whole screen, so you never rest showing half of two slides. */
-    let snapTimer = 0;
-    let snapAnchor = -1;
-    const slideSnap = () => {
-      if (reduce || Date.now() < suppressSnapRef.current) return;
-      const vh = deck.clientHeight;
-      const hTop = heritageRef.current?.offsetTop;
-      const rTop = recordRef.current?.offsetTop;
-      if (!hTop) return;
-      const y = deck.scrollTop;
-      if (y < hTop - vh + 4) {
-        snapAnchor = -1; // still inside act 1 — leave the scroll free
-        return;
-      }
-      const pts = [hTop, rTop].filter((v) => typeof v === "number" && v > 0);
-      const nearest = pts.reduce((b, p) => (Math.abs(p - y) < Math.abs(b - y) ? p : b));
-      if (snapAnchor < 0) {
-        snapAnchor = nearest;
-        if (Math.abs(nearest - y) > 2) deck.scrollTo({ top: nearest, behavior: "smooth" });
-        return;
-      }
-      if (Math.abs(nearest - y) < 8) {
-        snapAnchor = nearest; // already settled on a slide
-        return;
-      }
-      const moved = y - snapAnchor;
-      let target;
-      if (Math.abs(moved) < vh * 0.12) {
-        target = snapAnchor; // small drift — hold this slide
-      } else if (moved > 0) {
-        target = pts.find((p) => p > y + 6) ?? pts[pts.length - 1];
-      } else {
-        target = [...pts].reverse().find((p) => p < y - 6);
-        if (target == null) {
-          snapAnchor = -1; // scrolled back up above the slides — return to act 1
-          return;
-        }
-      }
-      snapAnchor = target;
-      if (Math.abs(target - y) > 2) deck.scrollTo({ top: target, behavior: "smooth" });
-    };
-
+    let previousY = deck.scrollTop;
     const onDeckScroll = () => {
+      const y = deck.scrollTop;
+      const heritageTop = heritageRef.current?.offsetTop ?? Infinity;
+      const recordTop = recordRef.current?.offsetTop ?? Infinity;
+      const crossingIntoHeritage =
+        previousY < heritageTop && y > previousY && y >= heritageTop - deck.clientHeight * 0.18;
+      const crossingIntoRecord =
+        previousY < recordTop && y > previousY && y >= recordTop - deck.clientHeight * 0.18;
+      previousY = y;
+
+      if (crossingIntoHeritage && y < heritageTop) {
+        deck.scrollTo({ top: heritageTop, behavior: "instant" });
+        previousY = heritageTop;
+      } else if (crossingIntoRecord && y < recordTop) {
+        deck.scrollTo({ top: recordTop, behavior: "instant" });
+        previousY = recordTop;
+      }
+
+      if (deck.scrollTop >= heritageTop - 2 && wantSoundRef.current) {
+        wantSoundRef.current = false;
+        setSoundOn(false);
+        fadeAudio(0, 450, () => audioEl?.pause());
+      }
       readScroll();
-      clearTimeout(snapTimer);
-      snapTimer = setTimeout(slideSnap, 110);
     };
     deck.addEventListener("scroll", onDeckScroll, { passive: true });
     readScroll();
@@ -494,13 +470,19 @@ function App() {
     }
 
     /* ---------- keyboard ---------- */
+    let keyTarget = 0;
+    let lastKeyAt = 0;
     const onKey = (e) => {
       if (e.target.closest("input, textarea, [contenteditable], .pm-wave")) return;
       if (["ArrowDown", "PageDown"].includes(e.key)) {
-        goTo(currentDot + 1);
+        keyTarget = (Date.now() - lastKeyAt < 900 ? keyTarget : currentDot) + 1;
+        lastKeyAt = Date.now();
+        goTo(keyTarget);
         e.preventDefault();
       } else if (["ArrowUp", "PageUp"].includes(e.key)) {
-        goTo(currentDot - 1);
+        keyTarget = (Date.now() - lastKeyAt < 900 ? keyTarget : currentDot) - 1;
+        lastKeyAt = Date.now();
+        goTo(keyTarget);
         e.preventDefault();
       } else if (e.key === "Home") {
         goTo(0);
@@ -526,7 +508,6 @@ function App() {
       alive = false;
       timers.forEach(clearTimeout);
       clearInterval(tickId);
-      clearTimeout(snapTimer);
       cancelAnimationFrame(rafId);
       deck.removeEventListener("scroll", onDeckScroll);
       window.removeEventListener("keydown", onKey);
@@ -539,7 +520,7 @@ function App() {
       clearInterval(fadeRef.current);
       if (audioEl) audioEl.pause();
     };
-  }, [goTo]);
+  }, [goTo, fadeAudio]);
 
   const base = import.meta.env.BASE_URL;
   const rootStyle = {
@@ -550,6 +531,11 @@ function App() {
   return (
     <div className="landing" ref={deckRef} style={rootStyle}>
       <audio ref={audioRef} src={`${base}paramount-audio/shore.m4a`} loop preload="none" />
+      <header className="pm-chapter-nav">
+        <Link to={ALL_PROJECTS}>Penang Coastal Histories</Link>
+        <span>Project Paramount</span>
+        <Link to={ALL_PROJECTS}>Both projects <span aria-hidden="true">↗</span></Link>
+      </header>
 
       {/* ---- fixed chrome ---- */}
       <div className="pm-hud" ref={hudRef} aria-hidden="true">
@@ -702,7 +688,7 @@ function App() {
           <h2 className="pm-record-h">
             这份记录还在做。
             <span className="pm-en">
-              The record is still being made. The projects are below.
+              The record is still being made. The map, glossary and accounts are below.
             </span>
           </h2>
           <div className="pm-gateway">
@@ -715,6 +701,7 @@ function App() {
             ))}
           </div>
           <div className="pm-foot">
+            <Link to={ALL_PROJECTS}>← Both projects</Link>
             <span>Project Paramount · oral history</span>
             <span>recorded 2025-2026</span>
             <span>In partnership with JEDI</span>

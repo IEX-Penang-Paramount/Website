@@ -12,7 +12,7 @@
   font-size: 0.62rem;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--color-ink-muted);
+  color: rgba(247, 251, 248, .8);
 }
 
 .period-filter__bar {

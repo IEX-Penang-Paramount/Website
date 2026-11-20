@@ -20,7 +20,8 @@
 .rec-lead {
   display: block;
   padding: var(--space-7) var(--space-6);
-  background: var(--color-navy);
+  background: linear-gradient(135deg, rgba(20, 58, 72, .94), rgba(55, 103, 109, .9));
+  border-radius: 18px;
   color: var(--color-on-dark);
   text-decoration: none;
   transition: background var(--transition);
@@ -66,12 +67,13 @@
 /* ---------- The rest ---------- */
 .rec-list {
   list-style: none;
-  margin: 0;
+  margin: var(--space-4) 0 0;
   padding: 0;
-  border: 1px solid var(--color-rule);
-  border-top: none;
+  display: grid;
+  gap: var(--space-3);
+  border: 0;
 }
-.rec-list li + li { border-top: 1px solid var(--color-rule); }
+.rec-list li + li { border-top: 0; }
 
 .rec-row {
   display: grid;
@@ -79,7 +81,9 @@
   align-items: center;
   gap: var(--space-4);
   padding: var(--space-5) var(--space-6);
-  background: var(--color-surface);
+  background: linear-gradient(145deg, rgba(255, 255, 255, .82), rgba(220, 235, 230, .52));
+  border-radius: 22px;
+  box-shadow: 0 10px 28px rgba(28, 67, 67, .045);
   text-decoration: none;
   color: inherit;
   transition: background var(--transition);

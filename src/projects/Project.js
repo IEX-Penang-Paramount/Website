@@ -1,5 +1,5 @@
-/** The routing page, which lists every project. */
-export const ALL_PROJECTS = "/projects";
+/** The shared landing, which introduces every project. */
+export const ALL_PROJECTS = "/";
 
 /** A project: its UI config plus the sections built from its data. Read-only. */
 export class Project {

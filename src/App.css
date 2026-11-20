@@ -7,23 +7,23 @@
 .landing {
   --pm-sky-hi:   #b6bcc0;
   --pm-sky-lo:   #cbcfd0;
-  --pm-ember:    #bf5730;
-  --pm-ember-lt: #d9794c;
-  --pm-water:    #42525a;
-  --pm-water-d:  #232f34;
-  --pm-dark:     #0f1519;
-  --pm-haze:     #e8e6df;
-  --pm-haze-dim: #949a9c;
+  --pm-ember:    #e0a56f;
+  --pm-ember-lt: #e8bb91;
+  --pm-water:    #346b78;
+  --pm-water-d:  #0b3446;
+  --pm-dark:     #082635;
+  --pm-haze:     #f4fbf9;
+  --pm-haze-dim: #b4d4d4;
 
-  --pm-paper:     #eae7e0;
-  --pm-paper-ink: #23221c;
-  --pm-paper-dim: #5d594e;
+  --pm-paper:     #f2f7f5;
+  --pm-paper-ink: #173746;
+  --pm-paper-dim: #536c73;
 
-  --pm-display: "Big Shoulders Display", "Arial Narrow", "Helvetica Neue", sans-serif;
-  --pm-brush:   "Ma Shan Zheng", "Noto Sans SC", cursive;
-  --pm-sans:    "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --pm-display: Arial, Helvetica, "Noto Sans SC", sans-serif;
+  --pm-brush:   Arial, Helvetica, "Noto Sans SC", sans-serif;
+  --pm-sans:    Arial, Helvetica, "Noto Sans SC", sans-serif;
   --pm-cjk:     "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif;
-  --pm-mono:    "IBM Plex Mono", ui-monospace, Menlo, monospace;
+  --pm-mono:    Arial, Helvetica, "Noto Sans SC", sans-serif;
   --pm-ease: cubic-bezier(0.22, 1, 0.36, 1);
   --p: 0;
 
@@ -32,7 +32,7 @@
   height: 100dvh;
   overflow-y: auto;
   overflow-x: hidden;
-  scroll-snap-type: none;   /* the slide transitions are snapped in App.jsx (act 1 stays free) */
+  scroll-snap-type: y proximity;
   scroll-behavior: smooth;
   -webkit-overflow-scrolling: touch;
   overscroll-behavior: none;
@@ -142,8 +142,8 @@
   color: #f0a06a; text-shadow: 0 1px 2px rgba(0, 0, 0, 0.9), 0 0 18px rgba(0, 0, 0, 0.7);
 }
 .pm-wordmark {
-  font-family: var(--pm-display); font-weight: 900; text-transform: uppercase;
-  font-size: clamp(3rem, 13vw, 10rem); line-height: 0.8; letter-spacing: 0.005em;
+  font-family: var(--pm-display); font-weight: 700; text-transform: none;
+  font-size: clamp(3rem, 9vw, 7rem); line-height: 0.95; letter-spacing: -0.04em;
   color: #f4f6f7; margin: 0.55rem 0 0; text-shadow: 0 3px 46px rgba(0, 0, 0, 0.6);
 }
 .pm-lead { margin: 1.1rem 0 0; max-width: 40ch; font-family: var(--pm-cjk); font-size: 1.06rem; color: #eef1f2; text-shadow: 0 1px 16px rgba(0, 0, 0, 0.9); }
@@ -224,7 +224,7 @@
   position: relative;
   min-height: 100dvh;
   scroll-snap-align: start;
-  scroll-snap-stop: always;
+  scroll-snap-stop: normal;
   overflow: hidden;
   display: flex; align-items: center;
   isolation: isolate;
@@ -291,3 +291,45 @@
   .pm-cue span::after { display: none; }
   .pm-dots button { transition: none; }
 }
+
+/* More natural supporting type throughout the immersive chapter. */
+.pm-mono, .pm-k, .pm-foot, .pm-gateway .pm-gk {
+  font-family: var(--pm-sans);
+  letter-spacing: .02em;
+  text-transform: none;
+}
+
+/* The Paramount chapter shares the main landing's photographic editorial language. */
+.pm-chapter-nav { position: fixed; z-index: 45; top: 0; left: 0; right: 0; min-height: 70px; padding: 1.2rem clamp(1.2rem, 4vw, 3rem); display: flex; align-items: center; justify-content: space-between; gap: 1rem; border-bottom: 1px solid rgba(255,255,255,.38); color: #fff; font-size: .9rem; line-height: 1.2; transition: color .4s, border-color .4s; }
+.pm-chapter-nav a:first-child { font-size: 1.25rem; font-weight: 700; letter-spacing: -.035em; }
+.pm-chapter-nav > span { opacity: .72; }
+.pm-chapter-nav a:last-child { font-weight: 600; }
+.pm-chapter-nav a:hover { text-decoration: underline; text-underline-offset: 4px; }
+.landing.is-paper .pm-chapter-nav { color: var(--pm-paper-ink); border-color: rgba(23,55,70,.25); }
+.pm-hud { display: none; }
+.pm-brush { display: none; }
+.pm-note { left: clamp(1.2rem, 7vw, 6rem); bottom: clamp(6rem, 18vh, 10rem); max-width: 59rem; }
+.pm-k { color: #fff; font-size: .95rem; font-weight: 600; text-shadow: none; }
+.pm-wordmark { font-size: clamp(4.6rem, 11vw, 10rem); font-weight: 500; line-height: .98; letter-spacing: -.055em; text-shadow: 0 2px 25px rgba(5,28,42,.22); }
+.pm-lead { max-width: 38rem; margin-top: 1.8rem; font-size: clamp(1.12rem, 1.8vw, 1.45rem); line-height: 1.55; }
+.pm-lead .pm-en { margin-top: .65rem; font-size: 1rem; color: #e0e9e9; }
+.pm-wash { background: linear-gradient(90deg, rgba(5,32,46,.72), rgba(5,32,46,.1) 85%), linear-gradient(0deg, rgba(5,32,46,.46), transparent 45%); }
+.pm-horizon { opacity: .28; }
+.pm-dots button.is-on { background: #fff; border-color: #fff; }
+.pm-cue { font-size: .85rem; letter-spacing: .03em; text-transform: none; color: #fff; }
+.pm-sound { left: clamp(1.2rem, 7vw, 6rem); bottom: clamp(1.5rem, 5vh, 3rem); border: 0; border-bottom: 1px solid rgba(255,255,255,.7); background: none; backdrop-filter: none; font-size: .8rem; letter-spacing: 0; text-transform: none; }
+.pm-slide__in--paper h2 { font-weight: 500; text-transform: none; line-height: 1.04; letter-spacing: -.045em; font-size: clamp(2.7rem, 6vw, 5rem); }
+.pm-gateway { gap: 1rem; background: none; border: 0; }
+.pm-gateway a { border-radius: 12px; padding: 1.6rem; }
+.pm-gateway .pm-gt { font-weight: 500; text-transform: none; letter-spacing: -.03em; }
+@media (max-width: 640px) {
+  .pm-chapter-nav { min-height: 64px; padding: 1rem 1.2rem; }
+  .pm-chapter-nav a:first-child { max-width: 10rem; font-size: 1rem; }
+  .pm-chapter-nav > span { display: none; }
+  .pm-chapter-nav a:last-child { font-size: .8rem; }
+  .pm-note { bottom: 21vh; }
+  .pm-wordmark { font-size: clamp(3.6rem, 16vw, 6rem); }
+  .pm-sound { left: 1.2rem; right: auto; }
+}
+.pm-gateway a { background: linear-gradient(145deg, rgba(30,76,91,.72), rgba(76,120,123,.4)); border: 1px solid rgba(232,245,241,.16); backdrop-filter: blur(8px); }
+.pm-gateway a:hover { background: linear-gradient(145deg, rgba(41,92,106,.85), rgba(85,133,134,.58)); }

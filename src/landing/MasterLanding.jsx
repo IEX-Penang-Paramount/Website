@@ -15,7 +15,7 @@ function MasterLanding() {
         <a className="master-header__link" href="#projects">See both projects <span aria-hidden="true">↘</span></a>
       </header>
 
-      <section className="master-intro" aria-labelledby="master-title" style={{ backgroundImage: `linear-gradient(90deg, rgba(5,32,46,.82), rgba(5,32,46,.32)), url(${import.meta.env.BASE_URL}paramount-photos/outSea_expanded.jpg)` }}>
+      <section className="master-intro" aria-labelledby="master-title" style={{ backgroundImage: `linear-gradient(90deg, rgba(21,49,59,.82), rgba(32,63,74,.28)), url(${import.meta.env.BASE_URL}paramount-photos/outSea_expanded.jpg)` }}>
         <div className="master-intro__copy">
           <p className="master-kicker">Penang’s fishing communities</p>
           <h1 id="master-title">Stories from<br /><em>the shoreline.</em></h1>

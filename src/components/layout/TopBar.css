@@ -95,3 +95,4 @@
     padding-bottom: var(--space-1);
   }
 }
+.topbar { background: linear-gradient(110deg, rgba(32,63,74,.9), rgba(76,112,106,.8)); }

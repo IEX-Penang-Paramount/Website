@@ -18,37 +18,43 @@ const PHOTOS = {
 };
 
 const NOTE = {
-  kicker: "An oral history · 口述记录",
-  title: "Paramount",
-  zh: "一群渔民，常年在 Paramount讨海。他们怎么读潮水和天气，我们记录下来。",
-  en: "A few fishermen work the water off Paramount. This is a record of how they read the tide and the weather.",
+  kicker: "VOICES FROM THE WATER · 海上来声",
+  title: "PARAMOUNT",
+  zh: ["每天，海都会带走一些声音。", "引擎声、风声、渔网落水的声音，", "还有那些没有被写下来的故事。", "在 Paramount，", "我们沿着潮汐，记录一群以海为生的人。"],
+  en: ["Every day, the sea carries a few more voices away.", "The engine, the wind, the sound of nets meeting water,", "and the stories that were never written down.", "In Paramount, we followed the tide", "to record the people whose lives are shaped by the sea,"],
 };
 
 const BEAT = {
-  kicker: "The horizon · 地平线",
+  kicker: "The tide · 潮汐",
   lines: [
     {
-      zh: "摘抄文案，摘抄文案",
-      en: "Quote text, quote text",
-    },
-    {
-      zh: "摘抄文案，摘抄文案",
-      en: "Quote text, quote text",
+      zh: "趁这些声音还在，趁这片海仍然记得。",
+      en: "While their voices can still be heard, and while the water still remembers.",
     },
   ],
 };
 
 const RECORDING = {
-  label: "Recording 01 · on the tide · 0:24",
+  label: "Interview excerpts · Paramount",
   language: "Spoken in Chinese 中文",
-  attribution: "— Name · Paramount · recorded 2026 · translated",
+  attribution: "— 梁明德 · interview notes · English translated",
   duration: 24,
   transcript: [
-    { t: 0, zh: "占位文案", en: "SampleText" },
-    { t: 4, zh: "占位，文案", en: "Sample, Text" },
-    { t: 10, zh: "占位文案，占位文案", en: "SampleText, SampleText" },
-    { t: 16, zh: "占位文案占位，文案", en: "SampleTextSample, Text" },
-    { t: 21, zh: "占位文案，占位文案占位文案", en: "SampleText, SampleTextSampleText" },
+    {
+      t: 0,
+      zh: "捕鱼不是科技、不是科研。",
+      en: "Fishing is neither technology nor science.",
+    },
+    {
+      t: 8,
+      zh: "最要紧是你要了解到这里的海哪里会比较多一点点，",
+      en: "What matters most is knowing where this sea holds a little more fish.",
+    },
+    {
+      t: 16,
+      zh: "这些靠经验和运气。涨潮退潮，顺其自然",
+      en: "It takes experience and luck. The tide rises and falls; you go with its flow.",
+    },
   ],
 };
 
@@ -589,17 +595,19 @@ function App() {
           <div className="pm-note" ref={noteRef}>
             <p className="pm-k">{NOTE.kicker}</p>
             <h1 className="pm-wordmark">{NOTE.title}</h1>
-            <p className="pm-lead">
-              {NOTE.zh}
-              <span className="pm-en">{NOTE.en}</span>
-            </p>
+            <div className="pm-intro">
+              <p className="pm-lead" lang="zh">{NOTE.zh.map((line) => <span key={line}>{line}</span>)}</p>
+              <p className="pm-lead pm-lead--en" lang="en">{NOTE.en.map((line) => <span key={line}>{line}</span>)}</p>
+            </div>
+            <Link className="pm-intro-cta" to="/paramount/story">进入他们的故事 · ENTER THEIR STORIES <span aria-hidden="true">↗</span></Link>
+            <p className="pm-field-notes">FIELD NOTES <span>4 STORIES · 4 VOICES</span></p>
           </div>
 
           <div className="pm-brush" ref={brushRef} aria-hidden="true">
             潮
           </div>
           <div className="pm-cue" ref={cueRef}>
-            Scroll <span />
+            故事从潮水开始 <small>FOLLOW THE TIDE</small><span />
           </div>
 
           <div className="pm-beat" ref={beatRef}>

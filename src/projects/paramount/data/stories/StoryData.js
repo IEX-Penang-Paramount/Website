@@ -26,14 +26,6 @@ export const stories = [
     author: "Junde",
     time: "2026-02-10",
 },
-    {
-    articleID: "A3",
-    title: "Ipsium Lopium Example 3",
-    abstract: "This is a test abstract 3",
-    abstractQuote: "This is a test quote 3",
-    author: "Example",
-    time: "2026-03-02",
-  },
   {
     articleID: "A4",
     title: "梁先生口述：北槟渔业空间与海岸记忆",

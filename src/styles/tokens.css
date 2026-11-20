@@ -12,23 +12,23 @@
 
 :root {
   /* ---------- Colour ---------- */
-  --color-sand: #f5f1e8;
-  --color-surface: #fcfaf5;
-  --color-sand-alt: #e8eee8;
+  --color-sand: #f3f0e7;
+  --color-surface: #fcfaf4;
+  --color-sand-alt: #e7eee8;
 
-  --color-navy: #244854;
-  --color-navy-deep: #193a46;
-  --color-teal: #648b8d;
+  --color-navy: #203f4a;
+  --color-navy-deep: #18313a;
+  --color-teal: #718f88;
 
-  --color-terracotta: #b9795e;
-  --color-terracotta-dk: #8e5945;
+  --color-terracotta: #a7c9be;
+  --color-terracotta-dk: #4d8173;
 
-  --color-ink: #273d40;
-  --color-ink-muted: #64716d;
-  --color-rule: #cdd6cd;
+  --color-ink: #263e43;
+  --color-ink-muted: #65746f;
+  --color-rule: #c9d8d0;
 
-  --color-on-dark: #f6f2e9;
-  --color-on-dark-muted: #c7d6d1;
+  --color-on-dark: #f3f0e7;
+  --color-on-dark-muted: #b8cec6;
   --color-on-accent: #fffaf2;
 
   /* ---------- Spacing scale ---------- */

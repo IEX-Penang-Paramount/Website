@@ -99,7 +99,7 @@
 /* ---------- Specimen cards ---------- */
 .specimen-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(16.5rem, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 16.5rem), 1fr));
   gap: var(--space-4);
 }
 
@@ -161,6 +161,7 @@
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--cat);
+  overflow-wrap: anywhere;
 }
 
 .specimen__swatch {
@@ -175,13 +176,16 @@
   gap: var(--space-3);
   flex-wrap: wrap;
   margin-top: var(--space-1);
+  min-width: 0;
 }
 
 .specimen__zh {
-  font-family: var(--font-brush);
-  font-size: clamp(2.4rem, 7vw, 3.4rem);
-  line-height: 1;
+  font-family: var(--font-sans);
+  font-size: 1.65rem;
+  line-height: 1.2;
   color: var(--color-navy);
+  overflow-wrap: anywhere;
+  min-width: 0;
 }
 
 .specimen__roman {
@@ -189,12 +193,15 @@
   font-size: 0.8rem;
   letter-spacing: 0.04em;
   color: var(--color-ink-muted);
+  overflow-wrap: anywhere;
+  min-width: 0;
 }
 
 .specimen__gloss {
   font-size: var(--text-sm);
   line-height: 1.55;
   color: var(--color-ink-muted);
+  overflow-wrap: anywhere;
 
   display: -webkit-box;
   -webkit-box-orient: vertical;

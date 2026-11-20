@@ -11,3 +11,5 @@
   .project-front .page-header { min-height: 65svh; }
   .project-front--paramount .page-header { background-position: 64% center; }
 }
+.project-front--sungai-batu .page-header { background: linear-gradient(115deg, #203f4a, #718f88); }
+.project-front .card-grid { max-width: 1320px; }

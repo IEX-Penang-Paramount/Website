@@ -254,7 +254,18 @@
 .master-project { border-radius: 18px; overflow: hidden; box-shadow: 0 16px 40px rgba(20, 55, 61, .08); transition: transform .25s ease, box-shadow .25s ease; }
 .master-project:hover { transform: translateY(-5px); box-shadow: 0 22px 48px rgba(20, 55, 61, .13); }
 .master-project__body { padding: clamp(1.5rem, 3vw, 3rem); }
-.master-footer { border-radius: 36px 36px 0 0; padding-top: 3rem; padding-bottom: 3rem; }
+.master-footer { border-radius: 0; padding-top: 3rem; padding-bottom: 3rem; }
 @media (prefers-reduced-motion: reduce) { .master-project { transition: none; } .master-project:hover { transform: none; } }
 .master-project { background: linear-gradient(145deg, rgba(255,255,255,.88), rgba(226,238,233,.68)); border: 1px solid rgba(132,166,159,.16); box-shadow: 0 14px 34px rgba(20,55,61,.05); }
 .master-project:hover { box-shadow: 0 20px 42px rgba(20,55,61,.1); }
+
+/* Working-shore palette: sea, shell, weathered green. */
+.master-landing { background: #f3f0e7; }
+.master-projects { background: #f3f0e7; color: #263e43; }
+.master-projects h2, .master-project h3 { color: #203f4a; }
+.master-projects .master-kicker, .master-project__topline, .master-project__link { color: #4d8173; }
+.master-project__graphic { background: repeating-radial-gradient(ellipse at 65% 120%, transparent 0 42px, rgba(243,240,231,.16) 43px 44px), linear-gradient(145deg, #718f88, #203f4a); }
+.master-project { background: linear-gradient(145deg, rgba(252,250,244,.92), rgba(218,232,222,.72)); }
+.master-footer { background: linear-gradient(115deg, #203f4a, #718f88); color: #f3f0e7; }
+.master-project-grid, .master-projects__head { max-width: 1400px; }
+.master-projects { padding-left: clamp(1.25rem, 4vw, 4rem); padding-right: clamp(1.25rem, 4vw, 4rem); }

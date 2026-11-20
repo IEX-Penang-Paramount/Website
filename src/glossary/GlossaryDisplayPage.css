@@ -28,3 +28,4 @@
 .glossary-detail__next a span { color: var(--color-ink); font-size: 2rem; }
 .glossary-detail--missing { min-height: 60vh; padding: 5rem max(1.5rem, 5vw); }
 @media (max-width: 700px) { .glossary-detail__hero { min-height: 450px; } .glossary-detail__content { grid-template-columns: 1fr; gap: 2.5rem; } .glossary-detail__number { display: none; } }
+.glossary-detail__hero { background: linear-gradient(110deg, #203f4a, #718f88); }
